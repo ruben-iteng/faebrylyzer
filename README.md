@@ -2,7 +2,8 @@
 
 # faebrylyzer
 
-<img height=300 title="Render" src="./build/visuals/render.png"/>
+<img height=250 title="Render" src="./build/visuals/render.png"/>
+<img height=250 title="Render" src="./build/visuals/render_back.png"/>
 <br/>
 
 8 channel logic analyser compatible with the fx2lafw firmware
