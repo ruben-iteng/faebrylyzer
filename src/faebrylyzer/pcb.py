@@ -11,10 +11,6 @@ from faebryk.exporters.pcb.layout.absolute import LayoutAbsolute
 from faebryk.exporters.pcb.layout.extrude import LayoutExtrude
 from faebryk.exporters.pcb.layout.matrix import LayoutMatrix
 from faebryk.exporters.pcb.layout.typehierarchy import LayoutTypeHierarchy
-from faebryk.library.has_pcb_layout_defined import has_pcb_layout_defined
-from faebryk.library.has_pcb_position import has_pcb_position
-from faebryk.library.has_pcb_position_defined import has_pcb_position_defined
-from faebryk.library.Net import Net
 from faebryk.libs.geometry.basic import Geometry
 from faebryk.libs.kicad.fileformats import (
     C_effects,
@@ -25,10 +21,11 @@ from faebryk.libs.kicad.fileformats import (
     C_xy,
     C_xyr,
 )
+
 from faebrylyzer.app import faebrylyzerApp
+from faebrylyzer.library.faebrykLogo import faebrykLogo
 from faebrylyzer.library.faebrylyzerModule import faebrylyzerModule
 from faebrylyzer.library.ResistorArray import ResistorArray
-from pyparsing import C
 
 logger = logging.getLogger(__name__)
 
@@ -44,23 +41,30 @@ E.g placing components, layer switching, mass renaming, etc.
 def apply_routing(transformer: PCB_Transformer):
     for node in get_node_children_all(transformer.app):
         # set routing strategy for capacitors to direct line
-        if isinstance(node, F.Capacitor):
-            node.add_trait(
-                F.has_pcb_routing_strategy_greedy_direct_line(
-                    F.has_pcb_routing_strategy_greedy_direct_line.Topology.DIRECT
-                )
-            )
+        # if isinstance(node, F.Capacitor):
+        #    node.add_trait(
+        #        F.has_pcb_routing_strategy_greedy_direct_line(
+        #            F.has_pcb_routing_strategy_greedy_direct_line.Topology.DIRECT
+        #        )
+        #    )
+        ...
 
 
 def apply_root_layout(app: faebrylyzerApp, board_size: tuple[float, float]):
-    Point = has_pcb_position.Point
-    L = has_pcb_position.layer_type
+    Point = F.has_pcb_position.Point
+    L = F.has_pcb_position.layer_type
     LVL = LayoutTypeHierarchy.Level
 
     board_width, board_height = board_size
 
     # manual placement
     layouts = [
+        LVL(
+            mod_type=faebrykLogo,
+            layout=LayoutAbsolute(
+                Point((board_width / 2, board_height / 2, 0, L.TOP_LAYER))
+            ),
+        ),
         LVL(
             mod_type=faebrylyzerModule,
             layout=LayoutAbsolute(Point((0, board_height / 2, 90, L.TOP_LAYER))),
@@ -110,7 +114,7 @@ def apply_root_layout(app: faebrylyzerApp, board_size: tuple[float, float]):
                     ),
                     LVL(
                         mod_type=F.Crystal_Oscillator,
-                        layout=LayoutAbsolute(Point((-1.5, -6.5, 180, L.NONE))),
+                        layout=LayoutAbsolute(Point((-3.25, -7, 180, L.NONE))),
                         children_layout=LayoutTypeHierarchy(
                             layouts=[
                                 LVL(
@@ -134,7 +138,14 @@ def apply_root_layout(app: faebrylyzerApp, board_size: tuple[float, float]):
         LVL(
             mod_type=F.SNx4LVC541A,
             layout=LayoutAbsolute(Point((30, board_height / 2, 270, L.BOTTOM_LAYER))),
-            children_layout=LayoutTypeHierarchy(layouts=[]),
+            children_layout=LayoutTypeHierarchy(
+                layouts=[
+                    LVL(
+                        mod_type=F.Capacitor,
+                        layout=LayoutAbsolute(Point((-4.75, 2, 180, L.NONE))),
+                    ),
+                ]
+            ),
         ),
         LVL(
             mod_type=ResistorArray,
@@ -147,7 +158,17 @@ def apply_root_layout(app: faebrylyzerApp, board_size: tuple[float, float]):
         LVL(
             mod_type=F.LDO,
             layout=LayoutAbsolute(Point((25, 16.5, 180, L.BOTTOM_LAYER))),
-            children_layout=LayoutTypeHierarchy(layouts=[]),
+            children_layout=LayoutTypeHierarchy(
+                layouts=[
+                    LVL(
+                        mod_type=F.Capacitor,
+                        layout=LayoutExtrude(
+                            base=Point((-3, 0, 0, L.NONE)),
+                            vector=(6, 0, 90),
+                        ),
+                    ),
+                ]
+            ),
         ),
         LVL(
             mod_type=F.EEPROM,
@@ -157,20 +178,24 @@ def apply_root_layout(app: faebrylyzerApp, board_size: tuple[float, float]):
                     LVL(
                         mod_type=F.Resistor,
                         layout=LayoutExtrude(
-                            base=Point((0.5, -2, 0, L.NONE)),
-                            vector=(0, 4, 180),
+                            base=Point((1.5, -1.8, 0, L.NONE)),
+                            vector=(0, 3.6, 180),
                             reverse_order=True,
                         ),
+                    ),
+                    LVL(
+                        mod_type=F.Capacitor,
+                        layout=LayoutAbsolute(Point((-0.9, 1.8, 180, L.NONE))),
                     ),
                 ]
             ),
         ),
     ]
 
-    app.add_trait(has_pcb_layout_defined(LayoutTypeHierarchy(layouts)))
+    app.add_trait(F.has_pcb_layout_defined(LayoutTypeHierarchy(layouts)))
 
     # set coordinate system
-    app.add_trait(has_pcb_position_defined(Point((0, 0, 0, L.NONE))))
+    app.add_trait(F.has_pcb_position_defined(Point((0, 0, 0, L.NONE))))
 
 
 def set_outline(
@@ -206,11 +231,10 @@ def set_outline(
     )
 
 
-def add_zones(transformer: PCB_Transformer, outline: list, offset: float = 1):
-    # for _layer in transformer.get_copper_layers():
+def add_zone(transformer: PCB_Transformer, outline: list, offset: float = 1):
     transformer.insert_zone(
-        net=transformer.get_net(Net.with_name("gnd")),
-        layers=["F.Cu", "B.Cu", "In1.Cu", "In2.Cu"],
+        net=transformer.get_net(F.Net.with_name("gnd")),
+        layers=[*transformer.get_copper_layers()],
         polygon=Geometry.rect_to_polygon(
             Geometry.bbox(
                 [Geometry.Point2D(coord) for coord in outline],
@@ -254,9 +278,19 @@ def add_graphical_elements(
         knockout=True,
     )
 
+    # line to indicate mechanical mounting
+    for layer in ["F.SilkS", "B.SilkS"]:
+        for y_location in [0, board_height]:
+            transformer.insert_line(
+                start=C_xy(0, y_location),
+                end=C_xy(board_width, y_location),
+                width=1,
+                layer=layer,
+            )
+
     # LED text
     for i, cled in enumerate(app.NODEs.channel_leds):
-        # (x, y, r, layer) = cled.NODEs.led.get_trait(F.has_pcb_position).get_position()
+        # (x, y, r, layer) = cled.NODEs.led.get_trait(F.F.has_pcb_position).get_position()
         led_text_offset_x = 1.25
         led_base_y = 3.25
         led_spacing_y = 4.5
@@ -271,7 +305,7 @@ def add_graphical_elements(
         )
 
     transformer.insert_text(
-        text="[ ] 5V",
+        text="[ ] PWR",
         at=C_xyr(led_text_offset_x, led_base_y + led_spacing_y * 2, 0),
         front=True,
         font=led_font,
@@ -324,7 +358,16 @@ def transform_pcb(transformer: PCB_Transformer):
     # ----------------------------------------
     #               Copper zones
     # ----------------------------------------
-    add_zones(transformer, outline, offset=1)
+    add_zone(transformer, outline, offset=1)
+
+    # ----------------------------------------
+    #               Vias
+    # ----------------------------------------
+    transformer.insert_via(
+        coord=(0, 0),
+        net=transformer.get_net(F.Net.with_name("gnd")),
+        size_drill=(0.3, 0),
+    )
 
     # ----------------------------------------
     #               Layout

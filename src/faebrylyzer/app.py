@@ -11,6 +11,8 @@ from faebryk.core.util import (
 from faebryk.libs.brightness import TypicalLuminousIntensity
 from faebryk.libs.units import P
 from faebryk.libs.util import times
+
+from faebrylyzer.library.faebrykLogo import faebrykLogo
 from faebrylyzer.library.faebrylyzerModule import faebrylyzerModule
 from faebrylyzer.library.ResistorArray import ResistorArray
 
@@ -69,6 +71,7 @@ class faebrylyzerApp(Module):
             mcu_current_limiting_resistor = times(2, ResistorArray)
             input_pullup_resistor = times(2, ResistorArray)
             usb_protection = F.GenericBusProtection(F.USB2_0)
+            faebryk_logo = faebrykLogo()
 
         self.NODEs = _NODEs(self)
 
@@ -91,8 +94,8 @@ class faebrylyzerApp(Module):
             "vbus": vbus.IFs.hv,
             "3v3": v3_3.IFs.hv,
             "gnd": gnd,
-            "usb_p": usb.IFs.usb_if.IFs.d.IFs.p,
-            "usb_n": usb.IFs.usb_if.IFs.d.IFs.n,
+            "usb_P": usb.IFs.usb_if.IFs.d.IFs.p,
+            "usb_N": usb.IFs.usb_if.IFs.d.IFs.n,
             "sda": i2c.IFs.sda.IFs.signal,
             "scl": i2c.IFs.scl.IFs.signal,
         }
@@ -172,6 +175,9 @@ class faebrylyzerApp(Module):
         # enable pins of buffer
         for oe in self.NODEs.buffer.IFs.OE:
             oe.IFs.signal.connect(gnd)
+
+        # usb
+        self.NODEs.mcu.IFs.usb.connect(self.NODEs.faebrylyzer_module.IFs.usb)
 
         # enable mcu
         self.NODEs.mcu.IFs.wakeup.set(on=True)

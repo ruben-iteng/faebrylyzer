@@ -5,16 +5,15 @@ import logging
 
 import faebryk.library._F as F
 from faebryk.core.core import Module
-from faebryk.libs.color import TypicalColorByTemperature
 from faebryk.libs.picker.lcsc import LCSC_Part
 from faebryk.libs.picker.picker import (
     PickerOption,
-    has_part_picked,
-    has_part_picked_defined,
     has_part_picked_remove,
     pick_module_by_params,
 )
 from faebryk.libs.units import P
+
+from faebrylyzer.library.faebrykLogo import faebrykLogo
 from faebrylyzer.library.MountingSlot import MountingSlot
 from faebrylyzer.library.ResistorArray import ResistorArray
 from faebrylyzer.library.SFPEdgeConnector import SFPEdgeConnector
@@ -526,6 +525,7 @@ def pick_cbm9002A(module: F.CBM9002A_56ILG):
                     "41": module.IFs.vcc.IFs.lv,
                     "53": module.IFs.vcc.IFs.lv,
                     "56": module.IFs.vcc.IFs.lv,
+                    "57": module.IFs.vcc.IFs.lv,  # thermal pad
                     #
                     "33": module.IFs.PA[0].IFs.signal,
                     "34": module.IFs.PA[1].IFs.signal,
@@ -678,6 +678,7 @@ def add_app_pickers(module: Module):
         SFPEdgeConnector: pick_manual_footprint,
         MountingSlot: pick_manual_footprint,
         F.GenericBusProtection: pick_no_footprint,
+        faebrykLogo: pick_manual_footprint,
     }
     F.has_multi_picker.add_pickers_by_type(
         module,

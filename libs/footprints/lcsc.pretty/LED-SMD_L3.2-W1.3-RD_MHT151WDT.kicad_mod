@@ -1,0 +1,209 @@
+(footprint "LED-SMD_L3.2-W1.3-RD_MHT151WDT"
+	(version 20240108)
+	(generator "pcbnew")
+	(generator_version "8.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0 -4 0)
+		(layer "F.SilkS")
+		(uuid "e8117b69-9cc7-4337-8165-2da1b8c3a40e")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "LED-SMD_L3.2-W1.3-RD_MHT151WDT"
+		(at 0 4 0)
+		(layer "F.Fab")
+		(uuid "6d015930-fdad-4b5d-8500-01df1e20553b")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Footprint" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "3a1d16bb-a30d-4492-96b7-da62cc1635fe")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "8696a042-cc0f-4f8f-9776-2193e15238cb")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "d2df822a-05ee-4976-8e56-3ab641c4f69f")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_line
+		(start -2.5 -0.7)
+		(end -2.5 0.7)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "f11e0fb8-86d8-4b1d-8eaa-0d32103ddb15")
+	)
+	(fp_line
+		(start -2.5 0.7)
+		(end -2.2 1)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "4881754a-031e-4b22-8f9c-5aae1984ef4a")
+	)
+	(fp_line
+		(start -2.2 -1)
+		(end -2.5 -0.7)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "ffda0e2d-748c-4c85-94e6-eb06bc54f728")
+	)
+	(fp_line
+		(start -2.2 1)
+		(end -1 1)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "58331c05-6876-4373-b549-4ad08c0e9e1b")
+	)
+	(fp_line
+		(start -1 -1)
+		(end -2.2 -1)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "6acd2466-db84-4cb3-838e-dc79e34f5446")
+	)
+	(fp_line
+		(start 0.9 1)
+		(end 2.4 1)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "b5308b00-a017-49d2-86af-12305d5a951c")
+	)
+	(fp_line
+		(start 2.4 -1)
+		(end 0.8 -1)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "56ea7193-85a0-4ea7-82fc-0aa9ca034886")
+	)
+	(fp_line
+		(start 2.4 1)
+		(end 2.4 -1)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "585c0fc0-b212-484c-a013-f2ffb2882ecf")
+	)
+	(fp_circle
+		(center -2.34 0.95)
+		(end -2.31 0.95)
+		(stroke
+			(width 0.06)
+			(type solid)
+		)
+		(fill none)
+		(layer "F.Fab")
+		(uuid "6c599b0f-e7bf-4f00-83c1-bd71db47ce8e")
+	)
+	(fp_circle
+		(center 0 0)
+		(end 0.47 0)
+		(stroke
+			(width 0.95)
+			(type solid)
+		)
+		(fill none)
+		(layer "F.Fab")
+		(uuid "7101290c-b148-4139-8313-ac8798bcaf9d")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "a1113d34-5107-4dd1-a057-b718b43e7f81")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "" thru_hole circle
+		(at 0 0)
+		(size 2.1 2.1)
+		(drill 2.1)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "b79c748a-84dd-48bd-ad05-46ab60a2dc98")
+	)
+	(pad "1" smd rect
+		(at -1.81 0)
+		(size 1.07 1.25)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(uuid "8dc749e4-3b4e-4a3e-93a5-ddf250768349")
+	)
+	(pad "2" smd rect
+		(at 1.81 0 180)
+		(size 1.07 1.25)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(uuid "0f7425c7-ec61-41d9-aaec-6d304b2611c5")
+	)
+	(model "${KIPRJMOD}/../libs//3dmodels/lcsc.3dshapes/LED-SMD_L3.2-W1.3-RD_MHT151WDT.wrl"
+		(offset
+			(xyz 0 0 -0.3)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

@@ -8,6 +8,7 @@ from faebryk.core.core import Module
 from faebryk.exporters.pcb.layout.absolute import LayoutAbsolute
 from faebryk.exporters.pcb.layout.typehierarchy import LayoutTypeHierarchy
 from faebryk.libs.util import times
+
 from faebrylyzer.library.MountingSlot import MountingSlot
 from faebrylyzer.library.SFPEdgeConnector import SFPEdgeConnector
 
@@ -60,7 +61,12 @@ class faebrylyzerModule(Module):
             vbus.IFs.hv.connect(self.NODEs.cardedge_connector.IFs.unnamed[power_pin])
         # channels
         for i, channel in enumerate(self.IFs.channels):
-            self.NODEs.cardedge_connector.IFs.unnamed[i + 1].connect(channel.IFs.signal)
+            if i == 0:
+                self.NODEs.cardedge_connector.IFs.unnamed[18].connect(
+                    channel.IFs.signal
+                )
+            else:
+                self.NODEs.cardedge_connector.IFs.unnamed[i].connect(channel.IFs.signal)
         # usb
         self.IFs.usb.IFs.usb_if.IFs.d.IFs.p.connect(
             self.NODEs.cardedge_connector.IFs.unnamed[12]

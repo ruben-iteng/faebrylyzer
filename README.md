@@ -14,7 +14,7 @@
 
 ## About
 
-faebrylyzer is an 8 channel logic analyser compatible with the fx2lafw firmware. It is designed to be integrated as a module, or used stand-alone.
+faebrylyzer is an 8 channel logic analyser compatible with the fx2lafw firmware. It is designed to be integrated as a module into other projects (e.g. a factory test rig).
 This project is build with the open-source EDA [faebryk](https://github.com/faebryk/faebryk).
 
 

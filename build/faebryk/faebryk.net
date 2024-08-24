@@ -218,6 +218,42 @@
             (tstamps "8")
             (fields))
         (comp
+            (ref "C9")
+            (value "2.2µF ±20% 6.3V X5R")
+            (footprint "lcsc:C0402")
+            (property
+                (name "Partnumber")
+                (value "CL05A225MQ5NSNC"))
+            (property
+                (name "Manufacturer")
+                (value "Samsung Electro-Mechanics"))
+            (property
+                (name "Datasheet")
+                (value "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2304140030_Samsung-Electro-Mechanics-CL05A225MQ5NSNC_C12530.pdf"))
+            (property
+                (name "JLCPCB stock")
+                (value "3549735"))
+            (property
+                (name "JLCPCB price")
+                (value "0.0010"))
+            (property
+                (name "JLCPCB description")
+                (value "6.3V 2.2uF X5R ±20% 0402  Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"))
+            (property
+                (name "JLCPCB Basic")
+                (value "True"))
+            (property
+                (name "JLCPCB Preferred")
+                (value "False"))
+            (property
+                (name "LCSC")
+                (value "C12530"))
+            (property
+                (name "faebryk_name")
+                (value "*.buffer.vcc.capacitor"))
+            (tstamps "9")
+            (fields))
+        (comp
             (ref "D1")
             (value "3.05V")
             (footprint "lcsc:LED-SMD_L3.2-W1.3-RD_GREEN-MHT151UGCT")
@@ -227,7 +263,7 @@
             (property
                 (name "faebryk_name")
                 (value "*.channel_leds[0].led"))
-            (tstamps "9")
+            (tstamps "10")
             (fields))
         (comp
             (ref "D2")
@@ -239,7 +275,7 @@
             (property
                 (name "faebryk_name")
                 (value "*.channel_leds[1].led"))
-            (tstamps "10")
+            (tstamps "11")
             (fields))
         (comp
             (ref "D3")
@@ -251,7 +287,7 @@
             (property
                 (name "faebryk_name")
                 (value "*.ldo.power_out.hv.tvs"))
-            (tstamps "11")
+            (tstamps "12")
             (fields))
         (comp
             (ref "D4")
@@ -263,7 +299,7 @@
             (property
                 (name "faebryk_name")
                 (value "*.mcu.reset_diode"))
-            (tstamps "12")
+            (tstamps "13")
             (fields))
         (comp
             (ref "D5")
@@ -275,7 +311,7 @@
             (property
                 (name "faebryk_name")
                 (value "*.power_led.led"))
-            (tstamps "13")
+            (tstamps "14")
             (fields))
         (comp
             (ref "D6")
@@ -287,7 +323,7 @@
             (property
                 (name "faebryk_name")
                 (value "*.status_led.led"))
-            (tstamps "14")
+            (tstamps "15")
             (fields))
         (comp
             (ref "H1")
@@ -296,7 +332,7 @@
             (property
                 (name "faebryk_name")
                 (value "*.faebrylyzer_module.keys"))
-            (tstamps "15")
+            (tstamps "16")
             (fields))
         (comp
             (ref "J1")
@@ -305,7 +341,13 @@
             (property
                 (name "faebryk_name")
                 (value "*.faebrylyzer_module.cardedge_connector"))
-            (tstamps "16")
+            (tstamps "17")
+            (fields))
+        (comp
+            (ref "LOGO1")
+            (value "faebrykLogo")
+            (footprint "custom:faebryk_logo")
+            (tstamps "18")
             (fields))
         (comp
             (ref "R1")
@@ -317,7 +359,7 @@
             (property
                 (name "faebryk_name")
                 (value "*.channel_leds[0].current_limiting_resistor"))
-            (tstamps "17")
+            (tstamps "19")
             (fields))
         (comp
             (ref "R13")
@@ -329,7 +371,7 @@
             (property
                 (name "faebryk_name")
                 (value "*.mcu.reset.pull_up"))
-            (tstamps "18")
+            (tstamps "20")
             (fields))
         (comp
             (ref "R14")
@@ -341,7 +383,7 @@
             (property
                 (name "faebryk_name")
                 (value "*.mcu_current_limiting_resistor[0]"))
-            (tstamps "19")
+            (tstamps "21")
             (fields))
         (comp
             (ref "R15")
@@ -353,7 +395,7 @@
             (property
                 (name "faebryk_name")
                 (value "*.mcu_current_limiting_resistor[1]"))
-            (tstamps "20")
+            (tstamps "22")
             (fields))
         (comp
             (ref "R2")
@@ -365,7 +407,7 @@
             (property
                 (name "faebryk_name")
                 (value "*.channel_leds[1].current_limiting_resistor"))
-            (tstamps "21")
+            (tstamps "23")
             (fields))
         (comp
             (ref "R22")
@@ -377,7 +419,7 @@
             (property
                 (name "faebryk_name")
                 (value "*.power_led.current_limiting_resistor"))
-            (tstamps "22")
+            (tstamps "24")
             (fields))
         (comp
             (ref "R23")
@@ -389,7 +431,7 @@
             (property
                 (name "faebryk_name")
                 (value "*.status_led.current_limiting_resistor"))
-            (tstamps "23")
+            (tstamps "25")
             (fields))
         (comp
             (ref "R3")
@@ -401,7 +443,7 @@
             (property
                 (name "faebryk_name")
                 (value "*.eeprom.i2c.scl.pull_up"))
-            (tstamps "24")
+            (tstamps "26")
             (fields))
         (comp
             (ref "R4")
@@ -413,7 +455,7 @@
             (property
                 (name "faebryk_name")
                 (value "*.eeprom.i2c.sda.pull_up"))
-            (tstamps "25")
+            (tstamps "27")
             (fields))
         (comp
             (ref "R5")
@@ -425,7 +467,7 @@
             (property
                 (name "faebryk_name")
                 (value "*.input_current_limiting_resistor[0]"))
-            (tstamps "26")
+            (tstamps "28")
             (fields))
         (comp
             (ref "R6")
@@ -437,7 +479,7 @@
             (property
                 (name "faebryk_name")
                 (value "*.input_current_limiting_resistor[1]"))
-            (tstamps "27")
+            (tstamps "29")
             (fields))
         (comp
             (ref "R7")
@@ -449,7 +491,7 @@
             (property
                 (name "faebryk_name")
                 (value "*.input_pullup_resistor[0]"))
-            (tstamps "28")
+            (tstamps "30")
             (fields))
         (comp
             (ref "R8")
@@ -461,7 +503,7 @@
             (property
                 (name "faebryk_name")
                 (value "*.input_pullup_resistor[1]"))
-            (tstamps "29")
+            (tstamps "31")
             (fields))
         (comp
             (ref "U1")
@@ -473,7 +515,7 @@
             (property
                 (name "faebryk_name")
                 (value "*.buffer"))
-            (tstamps "30")
+            (tstamps "32")
             (fields))
         (comp
             (ref "U2")
@@ -485,7 +527,7 @@
             (property
                 (name "faebryk_name")
                 (value "*.eeprom"))
-            (tstamps "31")
+            (tstamps "33")
             (fields))
         (comp
             (ref "U3")
@@ -497,7 +539,7 @@
             (property
                 (name "faebryk_name")
                 (value "*.ldo"))
-            (tstamps "32")
+            (tstamps "34")
             (fields))
         (comp
             (ref "U4")
@@ -509,7 +551,7 @@
             (property
                 (name "faebryk_name")
                 (value "*.mcu.mcu"))
-            (tstamps "33")
+            (tstamps "35")
             (fields))
         (comp
             (ref "XTAL1")
@@ -521,7 +563,7 @@
             (property
                 (name "faebryk_name")
                 (value "*.mcu.oscillator.crystal"))
-            (tstamps "34")
+            (tstamps "36")
             (fields)))
     (nets
         (net
@@ -538,6 +580,9 @@
                 (pin "1"))
             (node
                 (ref "C5")
+                (pin "1"))
+            (node
+                (ref "C9")
                 (pin "1"))
             (node
                 (ref "D3")
@@ -703,10 +748,10 @@
                 (pin "18")))
         (net
             (code 11)
-            (name "J1-19")
+            (name "J1-9")
             (node
                 (ref "J1")
-                (pin "19")))
+                (pin "9")))
         (net
             (code 12)
             (name "R23-2-U4-34")
@@ -856,24 +901,6 @@
                 (pin "54")))
         (net
             (code 36)
-            (name "U4-57")
-            (node
-                (ref "U4")
-                (pin "57")))
-        (net
-            (code 37)
-            (name "U4-8")
-            (node
-                (ref "U4")
-                (pin "8")))
-        (net
-            (code 38)
-            (name "U4-9")
-            (node
-                (ref "U4")
-                (pin "9")))
-        (net
-            (code 39)
             (name "buffer_in_0")
             (node
                 (ref "R5")
@@ -885,7 +912,7 @@
                 (ref "U1")
                 (pin "2")))
         (net
-            (code 40)
+            (code 37)
             (name "buffer_in_1")
             (node
                 (ref "R5")
@@ -897,7 +924,7 @@
                 (ref "U1")
                 (pin "3")))
         (net
-            (code 41)
+            (code 38)
             (name "buffer_in_2")
             (node
                 (ref "R5")
@@ -909,7 +936,7 @@
                 (ref "U1")
                 (pin "4")))
         (net
-            (code 42)
+            (code 39)
             (name "buffer_in_3")
             (node
                 (ref "R5")
@@ -921,7 +948,7 @@
                 (ref "U1")
                 (pin "5")))
         (net
-            (code 43)
+            (code 40)
             (name "buffer_in_4")
             (node
                 (ref "R6")
@@ -933,7 +960,7 @@
                 (ref "U1")
                 (pin "6")))
         (net
-            (code 44)
+            (code 41)
             (name "buffer_in_5")
             (node
                 (ref "R6")
@@ -945,7 +972,7 @@
                 (ref "U1")
                 (pin "7")))
         (net
-            (code 45)
+            (code 42)
             (name "buffer_in_6")
             (node
                 (ref "R6")
@@ -957,7 +984,7 @@
                 (ref "U1")
                 (pin "8")))
         (net
-            (code 46)
+            (code 43)
             (name "buffer_in_7")
             (node
                 (ref "R6")
@@ -969,7 +996,7 @@
                 (ref "U1")
                 (pin "9")))
         (net
-            (code 47)
+            (code 44)
             (name "buffer_out_0")
             (node
                 (ref "R1")
@@ -981,7 +1008,7 @@
                 (ref "U1")
                 (pin "18")))
         (net
-            (code 48)
+            (code 45)
             (name "buffer_out_1")
             (node
                 (ref "R14")
@@ -993,7 +1020,7 @@
                 (ref "U1")
                 (pin "17")))
         (net
-            (code 49)
+            (code 46)
             (name "buffer_out_2")
             (node
                 (ref "R14")
@@ -1002,7 +1029,7 @@
                 (ref "U1")
                 (pin "16")))
         (net
-            (code 50)
+            (code 47)
             (name "buffer_out_3")
             (node
                 (ref "R14")
@@ -1011,7 +1038,7 @@
                 (ref "U1")
                 (pin "15")))
         (net
-            (code 51)
+            (code 48)
             (name "buffer_out_4")
             (node
                 (ref "R15")
@@ -1020,7 +1047,7 @@
                 (ref "U1")
                 (pin "14")))
         (net
-            (code 52)
+            (code 49)
             (name "buffer_out_5")
             (node
                 (ref "R15")
@@ -1029,7 +1056,7 @@
                 (ref "U1")
                 (pin "13")))
         (net
-            (code 53)
+            (code 50)
             (name "buffer_out_6")
             (node
                 (ref "R15")
@@ -1038,7 +1065,7 @@
                 (ref "U1")
                 (pin "12")))
         (net
-            (code 54)
+            (code 51)
             (name "buffer_out_7")
             (node
                 (ref "R15")
@@ -1047,79 +1074,79 @@
                 (ref "U1")
                 (pin "11")))
         (net
-            (code 55)
+            (code 52)
             (name "ch_0")
+            (node
+                (ref "J1")
+                (pin "19"))
+            (node
+                (ref "R5")
+                (pin "4")))
+        (net
+            (code 53)
+            (name "ch_1")
             (node
                 (ref "J1")
                 (pin "2"))
             (node
                 (ref "R5")
-                (pin "4")))
+                (pin "3")))
         (net
-            (code 56)
-            (name "ch_1")
+            (code 54)
+            (name "ch_2")
             (node
                 (ref "J1")
                 (pin "3"))
             (node
                 (ref "R5")
-                (pin "3")))
+                (pin "2")))
         (net
-            (code 57)
-            (name "ch_2")
+            (code 55)
+            (name "ch_3")
             (node
                 (ref "J1")
                 (pin "4"))
             (node
                 (ref "R5")
-                (pin "2")))
+                (pin "1")))
         (net
-            (code 58)
-            (name "ch_3")
+            (code 56)
+            (name "ch_4")
             (node
                 (ref "J1")
                 (pin "5"))
             (node
-                (ref "R5")
-                (pin "1")))
+                (ref "R6")
+                (pin "4")))
         (net
-            (code 59)
-            (name "ch_4")
+            (code 57)
+            (name "ch_5")
             (node
                 (ref "J1")
                 (pin "6"))
             (node
                 (ref "R6")
-                (pin "4")))
+                (pin "3")))
         (net
-            (code 60)
-            (name "ch_5")
+            (code 58)
+            (name "ch_6")
             (node
                 (ref "J1")
                 (pin "7"))
             (node
                 (ref "R6")
-                (pin "3")))
+                (pin "2")))
         (net
-            (code 61)
-            (name "ch_6")
+            (code 59)
+            (name "ch_7")
             (node
                 (ref "J1")
                 (pin "8"))
             (node
                 (ref "R6")
-                (pin "2")))
-        (net
-            (code 62)
-            (name "ch_7")
-            (node
-                (ref "J1")
-                (pin "9"))
-            (node
-                (ref "R6")
                 (pin "1")))
         (net
-            (code 63)
+            (code 60)
             (name "gnd")
             (node
                 (ref "C1")
@@ -1144,6 +1171,9 @@
                 (pin "2"))
             (node
                 (ref "C8")
+                (pin "2"))
+            (node
+                (ref "C9")
                 (pin "2"))
             (node
                 (ref "D1")
@@ -1231,6 +1261,9 @@
                 (pin "56"))
             (node
                 (ref "U4")
+                (pin "57"))
+            (node
+                (ref "U4")
                 (pin "6"))
             (node
                 (ref "XTAL1")
@@ -1239,7 +1272,7 @@
                 (ref "XTAL1")
                 (pin "4")))
         (net
-            (code 64)
+            (code 61)
             (name "mcu_logic_0")
             (node
                 (ref "R14")
@@ -1248,7 +1281,7 @@
                 (ref "U4")
                 (pin "18")))
         (net
-            (code 65)
+            (code 62)
             (name "mcu_logic_1")
             (node
                 (ref "R14")
@@ -1257,7 +1290,7 @@
                 (ref "U4")
                 (pin "19")))
         (net
-            (code 66)
+            (code 63)
             (name "mcu_logic_2")
             (node
                 (ref "R14")
@@ -1266,7 +1299,7 @@
                 (ref "U4")
                 (pin "20")))
         (net
-            (code 67)
+            (code 64)
             (name "mcu_logic_3")
             (node
                 (ref "R14")
@@ -1275,7 +1308,7 @@
                 (ref "U4")
                 (pin "21")))
         (net
-            (code 68)
+            (code 65)
             (name "mcu_logic_4")
             (node
                 (ref "R15")
@@ -1284,7 +1317,7 @@
                 (ref "U4")
                 (pin "22")))
         (net
-            (code 69)
+            (code 66)
             (name "mcu_logic_5")
             (node
                 (ref "R15")
@@ -1293,7 +1326,7 @@
                 (ref "U4")
                 (pin "23")))
         (net
-            (code 70)
+            (code 67)
             (name "mcu_logic_6")
             (node
                 (ref "R15")
@@ -1302,7 +1335,7 @@
                 (ref "U4")
                 (pin "24")))
         (net
-            (code 71)
+            (code 68)
             (name "mcu_logic_7")
             (node
                 (ref "R15")
@@ -1311,7 +1344,7 @@
                 (ref "U4")
                 (pin "25")))
         (net
-            (code 72)
+            (code 69)
             (name "scl")
             (node
                 (ref "R3")
@@ -1323,7 +1356,7 @@
                 (ref "U4")
                 (pin "15")))
         (net
-            (code 73)
+            (code 70)
             (name "sda")
             (node
                 (ref "R4")
@@ -1335,19 +1368,25 @@
                 (ref "U4")
                 (pin "16")))
         (net
-            (code 74)
-            (name "usb_n")
+            (code 71)
+            (name "usb_N")
             (node
                 (ref "J1")
-                (pin "12")))
+                (pin "12"))
+            (node
+                (ref "U4")
+                (pin "9")))
         (net
-            (code 75)
-            (name "usb_p")
+            (code 72)
+            (name "usb_P")
             (node
                 (ref "J1")
-                (pin "13")))
+                (pin "13"))
+            (node
+                (ref "U4")
+                (pin "8")))
         (net
-            (code 76)
+            (code 73)
             (name "vbus")
             (node
                 (ref "C2")
