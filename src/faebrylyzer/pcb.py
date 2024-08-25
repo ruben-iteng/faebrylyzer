@@ -29,25 +29,12 @@ from faebrylyzer.library.ResistorArray import ResistorArray
 
 logger = logging.getLogger(__name__)
 
-"""
-Here you can do PCB scripting.
-E.g placing components, layer switching, mass renaming, etc.
-"""
-
 
 # ----------------------------------------
 #               Functions
 # ----------------------------------------
 def apply_routing(transformer: PCB_Transformer):
-    for node in get_node_children_all(transformer.app):
-        # set routing strategy for capacitors to direct line
-        # if isinstance(node, F.Capacitor):
-        #    node.add_trait(
-        #        F.has_pcb_routing_strategy_greedy_direct_line(
-        #            F.has_pcb_routing_strategy_greedy_direct_line.Topology.DIRECT
-        #        )
-        #    )
-        ...
+    pass
 
 
 def apply_root_layout(app: faebrylyzerApp, board_size: tuple[float, float]):
@@ -290,6 +277,7 @@ def add_graphical_elements(
 
     # LED text
     for i, cled in enumerate(app.NODEs.channel_leds):
+        # TODO: does not work, nodes get a position way later (see main.py)
         # (x, y, r, layer) = cled.NODEs.led.get_trait(F.F.has_pcb_position).get_position()
         led_text_offset_x = 1.25
         led_base_y = 3.25

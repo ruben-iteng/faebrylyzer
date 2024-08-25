@@ -234,15 +234,4 @@ class faebrylyzerApp(Module):
         # ----------------------------------------
         #              specializations
         # ----------------------------------------
-        # TODO: packages single resistors as explicit resistor arrays
-        # create a resistor array for every 4 resistors
-        # for i, r in enumerate(self.NODEs.input_current_limiting_resistor):
-        #    if i % 4 == 0:
-        #        resistor_array = F.ResistorArray(num_resistors=4)
-        #        for array_resistor, resistor in zip(
-        #            resistor_array.NODEs.resistor,
-        #            self.NODEs.input_current_limiting_resistor[i : i + 4],
-        #        ):
-        #            specialize_module(resistor, array_resistor)
-
-        # self.NODEs.mcu_current_limiting_resistor_array = resistor_array
+        # TODO: specialize single resistors into resistor arrays

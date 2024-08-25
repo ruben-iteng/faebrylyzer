@@ -166,6 +166,7 @@ def pick_led(module: F.LED):
     pick_module_by_params(
         module,
         [
+            # TODO: use parameters to select the right part?
             # PickerOption(
             #    part=LCSC_Part(partno="C2286"),
             #    params={
@@ -296,64 +297,6 @@ def pick_led(module: F.LED):
                     "max_current": F.Constant(20 * P.mA),
                 },
                 pinmap={"1": module.IFs.cathode, "2": module.IFs.anode},
-            ),
-        ],
-    )
-
-
-def pick_header(module: F.Header):
-    pick_module_by_params(
-        module,
-        [
-            PickerOption(
-                part=LCSC_Part(partno="C2691448"),
-                params={
-                    "horizontal_pin_count": F.Constant(1),
-                    "vertical_pin_count": F.Constant(4),
-                    # "pin_pitch": F.Constant(2.54),
-                    # "pin_type": F.Constant(F.Header.PinType.MALE),
-                    # "pad_type": F.Constant(F.Header.PadType.THROUGH_HOLE),
-                    # "angle": F.Constant(F.Header.Angle.STRAIGHT),
-                },
-                pinmap={f"{i+1}": module.IFs.unnamed[i] for i in range(4)},
-            ),
-            # PickerOption(
-            #    part=LCSC_Part(partno="C492421"),
-            #    params={
-            #        "horizontal_pin_count": F.Constant(2),
-            #        "vertical_pin_count": F.Constant(4),
-            #        "pin_pitch": F.Constant(2.54),
-            #        "pin_type": F.Constant(F.Header.PinType.MALE),
-            #        "pad_type": F.Constant(F.Header.PadType.THROUGH_HOLE),
-            #        "angle": F.Constant(F.Header.Angle.STRAIGHT),
-            #    },
-            #    pinmap={f"{i+1}": module.IFs.unnamed[i] for i in range(8)},
-            # ),
-            # PickerOption(
-            #    part=LCSC_Part(partno="C7501276"),
-            #    params={
-            #        "horizontal_pin_count": F.Constant(2),
-            #        "vertical_pin_count": F.Constant(5),
-            #        "pin_pitch": F.Constant(2.54),
-            #        "pin_type": F.Constant(F.Header.PinType.MALE),
-            #        "pad_type": F.Constant(F.Header.PadType.THROUGH_HOLE),
-            #        "angle": F.Constant(F.Header.Angle.STRAIGHT),
-            #    },
-            #    pinmap={f"{i+1}": module.IFs.unnamed[i] for i in range(10)},
-            # ),
-            PickerOption(
-                part=LCSC_Part(partno="C225521"),
-                params={
-                    "horizontal_pin_count": F.Constant(2),
-                    "vertical_pin_count": F.Constant(6),
-                    # "pin_pitch": F.Constant(2.54),
-                    # "pin_type": F.Constant(F.Header.PinType.MALE),
-                    # "pad_type": F.Constant(F.Header.PadType.THROUGH_HOLE),
-                    # "angle": F.Constant(F.Header.Angle.STRAIGHT),
-                },
-                pinmap={
-                    f"{i+1}": module.IFs.unnamed[i] for i in range(4)
-                },  # TODO: range(12)
             ),
         ],
     )
@@ -665,8 +608,6 @@ def add_app_pickers(module: Module):
         F.Resistor: pick_resistor,
         ResistorArray: pick_resistor_array,
         F.LED: pick_led,
-        F.Header: pick_header,
-        # F.Header: pick_header,
         F.LDO: pick_ldo,
         F.SNx4LVC541A: pick_sn74lvc541a,
         F.CBM9002A_56ILG: pick_cbm9002A,

@@ -15,11 +15,12 @@ from faebryk.libs.app.pcb import apply_design
 from faebryk.libs.logging import setup_basic_logging
 from faebryk.libs.picker.jlcpcb.pickers import add_jlcpcb_pickers
 from faebryk.libs.picker.picker import pick_part_recursively
+from rich.traceback import install
+from typing_extensions import Annotated
+
 from faebrylyzer.app import faebrylyzerApp
 from faebrylyzer.pcb import transform_pcb
 from faebrylyzer.pickers import add_app_pickers
-from rich.traceback import install
-from typing_extensions import Annotated
 
 # logging settings
 logger = logging.getLogger(__name__)
