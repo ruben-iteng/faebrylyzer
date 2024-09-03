@@ -4,7 +4,7 @@
 import logging
 
 import faebryk.library._F as F
-from faebryk.core.core import Module
+from faebryk.core.module import Module
 from faebryk.libs.picker.lcsc import LCSC_Part
 from faebryk.libs.picker.picker import (
     PickerOption,
@@ -175,7 +175,7 @@ def pick_led(module: F.LED):
             #        "forward_voltage": F.Constant(3.7),
             #        "max_current": F.Constant(100e-3),
             #    },
-            #    pinmap={"1": module.IFs.cathode, "2": module.IFs.anode},
+            #    pinmap={"1": module.cathode, "2": module.anode},
             # ),
             # PickerOption(
             #    part=LCSC_Part(partno="C72041"),
@@ -185,7 +185,7 @@ def pick_led(module: F.LED):
             #        "forward_voltage": F.Constant(3.1),
             #        "max_current": F.Constant(100e-3),
             #    },
-            #    pinmap={"1": module.IFs.cathode, "2": module.IFs.anode},
+            #    pinmap={"1": module.cathode, "2": module.anode},
             # ),
             # PickerOption(
             #    part=LCSC_Part(partno="C2290"),
@@ -195,7 +195,7 @@ def pick_led(module: F.LED):
             #        "forward_voltage": F.Constant(3.1),
             #        "max_current": F.Constant(60e-3),
             #    },
-            #    pinmap={"2": module.IFs.cathode, "1": module.IFs.anode},
+            #    pinmap={"2": module.cathode, "1": module.anode},
             # ),
             # PickerOption(
             #    part=LCSC_Part(partno="C2296"),
@@ -205,7 +205,7 @@ def pick_led(module: F.LED):
             #        "forward_voltage": F.Constant(2.1),
             #        "max_current": F.Constant(20e-3),
             #    },
-            #    pinmap={"2": module.IFs.cathode, "1": module.IFs.anode},
+            #    pinmap={"2": module.cathode, "1": module.anode},
             # ),
             # MHT151WDT
             PickerOption(
@@ -216,7 +216,7 @@ def pick_led(module: F.LED):
                     "forward_voltage": F.Constant(3.15 * P.V),
                     "max_current": F.Constant(20 * P.mA),
                 },
-                pinmap={"1": module.IFs.cathode, "2": module.IFs.anode},
+                pinmap={"1": module.cathode, "2": module.anode},
             ),
             # MHT151UGCT
             PickerOption(
@@ -227,7 +227,7 @@ def pick_led(module: F.LED):
                     "forward_voltage": F.Constant(3.05 * P.V),
                     "max_current": F.Constant(20 * P.mA),
                 },
-                pinmap={"1": module.IFs.cathode, "2": module.IFs.anode},
+                pinmap={"1": module.cathode, "2": module.anode},
             ),
             # XL-1606SURC
             PickerOption(
@@ -238,7 +238,7 @@ def pick_led(module: F.LED):
                     "forward_voltage": F.Constant(2.4 * P.V),
                     "max_current": F.Constant(20 * P.mA),
                 },
-                pinmap={"1": module.IFs.cathode, "2": module.IFs.anode},
+                pinmap={"1": module.cathode, "2": module.anode},
             ),
             # XL-1606SYGC
             # PickerOption(
@@ -249,7 +249,7 @@ def pick_led(module: F.LED):
             #        "forward_voltage": F.Constant(2.4 * P.V),
             #        "max_current": F.Constant(20 * P.mA),
             #    },
-            #    pinmap={"1": module.IFs.cathode, "2": module.IFs.anode},
+            #    pinmap={"1": module.cathode, "2": module.anode},
             # ),
             # XL-1606UBC
             PickerOption(
@@ -260,7 +260,7 @@ def pick_led(module: F.LED):
                     "forward_voltage": F.Constant(2.4 * P.V),
                     "max_current": F.Constant(20 * P.mA),
                 },
-                pinmap={"1": module.IFs.cathode, "2": module.IFs.anode},
+                pinmap={"1": module.cathode, "2": module.anode},
             ),
             # XL-1606UGC
             # PickerOption(
@@ -271,7 +271,7 @@ def pick_led(module: F.LED):
             #        "forward_voltage": F.Constant(3.4 * P.V),
             #        "max_current": F.Constant(20 * P.mA),
             #    },
-            #    pinmap={"1": module.IFs.cathode, "2": module.IFs.anode},
+            #    pinmap={"1": module.cathode, "2": module.anode},
             # ),
             # XL-1606UOC
             PickerOption(
@@ -282,21 +282,21 @@ def pick_led(module: F.LED):
                     "forward_voltage": F.Constant(2.4 * P.V),
                     "max_current": F.Constant(20 * P.mA),
                 },
-                pinmap={"1": module.IFs.cathode, "2": module.IFs.anode},
+                pinmap={"1": module.cathode, "2": module.anode},
             ),
             # XL-1606UWC
             PickerOption(
                 part=LCSC_Part(partno="C965866"),
                 params={
                     "color": F.Constant(
-                        F.LED.Color.WHARM_WHITE
+                        F.LED.Color.WARM_WHITE
                         # TypicalColorByTemperature.WARM_WHITE_FLUORESCENT_LED
                     ),
                     "max_brightness": F.Constant(1100 * P.millicandela),
                     "forward_voltage": F.Constant(3.4 * P.V),
                     "max_current": F.Constant(20 * P.mA),
                 },
-                pinmap={"1": module.IFs.cathode, "2": module.IFs.anode},
+                pinmap={"1": module.cathode, "2": module.anode},
             ),
         ],
     )
@@ -315,7 +315,7 @@ def pick_diode(module: F.Diode):
                     "reverse_working_voltage": F.Constant(100 * P.V),
                     "reverse_leakage_current": F.Constant(1 * P.uA),
                 },
-                pinmap={"1": module.IFs.cathode, "2": module.IFs.anode},
+                pinmap={"1": module.cathode, "2": module.anode},
             )
         ],
     )
@@ -326,39 +326,56 @@ def pick_crystal(module: F.Crystal):
         module,
         [
             PickerOption(
-                part=LCSC_Part(partno="C258965"),
+                part=LCSC_Part(partno="C388793"),
                 params={
                     "frequency": F.Constant(24 * P.Mhertz),
-                    "load_impedance": F.Constant(12 * P.pF),
+                    "load_capacitance": F.Constant(10 * P.pF),
                     "equivalent_series_resistance": F.Constant(50 * P.ohm),
-                    "shunt_capacitance": F.Constant(7 * P.pF),
-                    "frequency_temperature_tolerance": F.Constant(30 * P.ppm),  # 20?
-                    "frequency_tolerance": F.Constant(10 * P.ppm),
+                    "shunt_capacitance": F.Constant(5 * P.pF),
+                    "frequency_temperature_tolerance": F.Constant(15 * P.ppm),
+                    "frequency_tolerance": F.Constant(20 * P.ppm),
                 },
                 pinmap={
-                    "1": module.IFs.unnamed[0],
-                    "2": module.IFs.gnd,
-                    "3": module.IFs.unnamed[1],
-                    "4": module.IFs.gnd,
+                    "1": module.unnamed[0],
+                    "2": module.gnd,
+                    "3": module.unnamed[1],
+                    "4": module.gnd,
                 },
             ),
-            PickerOption(
-                part=LCSC_Part(partno="C70590"),
-                params={
-                    "frequency": F.Constant(24 * P.Mhertz),
-                    "load_impedance": F.Constant(12 * P.pF),
-                    "equivalent_series_resistance": F.Constant(50 * P.ohm),
-                    "shunt_capacitance": F.Constant(3 * P.pF),
-                    "frequency_temperature_tolerance": F.Constant(20 * P.ppm),
-                    "frequency_tolerance": F.Constant(10 * P.ppm),
-                },
-                pinmap={
-                    "1": module.IFs.unnamed[0],
-                    "2": module.IFs.gnd,
-                    "3": module.IFs.unnamed[1],
-                    "4": module.IFs.gnd,
-                },
-            ),
+            # PickerOption(
+            #    part=LCSC_Part(partno="C258965"),
+            #    params={
+            #        "frequency": F.Constant(24 * P.Mhertz),
+            #        "load_capacitance": F.Constant(12 * P.pF),
+            #        "equivalent_series_resistance": F.Constant(50 * P.ohm),
+            #        "shunt_capacitance": F.Constant(7 * P.pF),
+            #        "frequency_temperature_tolerance": F.Constant(30 * P.ppm),  # 20?
+            #        "frequency_tolerance": F.Constant(10 * P.ppm),
+            #    },
+            #    pinmap={
+            #        "1": module.unnamed[0],
+            #        "2": module.gnd,
+            #        "3": module.unnamed[1],
+            #        "4": module.gnd,
+            #    },
+            # ),
+            # PickerOption(
+            #    part=LCSC_Part(partno="C70590"),
+            #    params={
+            #        "frequency": F.Constant(24 * P.Mhertz),
+            #        "load_capacitance": F.Constant(12 * P.pF),
+            #        "equivalent_series_resistance": F.Constant(50 * P.ohm),
+            #        "shunt_capacitance": F.Constant(3 * P.pF),
+            #        "frequency_temperature_tolerance": F.Constant(20 * P.ppm),
+            #        "frequency_tolerance": F.Constant(10 * P.ppm),
+            #    },
+            #    pinmap={
+            #        "1": module.unnamed[0],
+            #        "2": module.gnd,
+            #        "3": module.unnamed[1],
+            #        "4": module.gnd,
+            #    },
+            # ),
         ],
     )
 
@@ -377,7 +394,7 @@ def pick_tvs(module: F.TVS):
                     "clamping_voltage": F.Constant(9 * P.V),
                     "max_current": F.Constant(38 * P.A),
                 },
-                pinmap={"1": module.IFs.cathode, "2": module.IFs.anode},
+                pinmap={"1": module.cathode, "2": module.anode},
             ),
             PickerOption(
                 # SD05C
@@ -389,7 +406,7 @@ def pick_tvs(module: F.TVS):
                     "clamping_voltage": F.Constant(9.8 * P.V),
                     "max_current": F.Constant(8 * P.A),
                 },
-                pinmap={"1": module.IFs.cathode, "2": module.IFs.anode},
+                pinmap={"1": module.cathode, "2": module.anode},
             ),
         ],
     )
@@ -405,14 +422,14 @@ def pick_eeprom(module: F.EEPROM):
                 # part=LCSC_Part(partno="C79987"), # SOIC-8
                 part=LCSC_Part(partno="C233771"),  # UDFN-8(2x3)
                 pinmap={
-                    "1": module.IFs.address[0].IFs.signal,
-                    "2": module.IFs.address[1].IFs.signal,
-                    "3": module.IFs.address[2].IFs.signal,
-                    "4": module.IFs.power.IFs.lv,
-                    "5": module.IFs.i2c.IFs.sda.IFs.signal,
-                    "6": module.IFs.i2c.IFs.scl.IFs.signal,
-                    "7": module.IFs.write_protect.IFs.signal,
-                    "8": module.IFs.power.IFs.hv,
+                    "1": module.address[0].signal,
+                    "2": module.address[1].signal,
+                    "3": module.address[2].signal,
+                    "4": module.power.lv,
+                    "5": module.i2c.sda.signal,
+                    "6": module.i2c.scl.signal,
+                    "7": module.write_protect.signal,
+                    "8": module.power.hv,
                 },
             )
         ],
@@ -426,76 +443,76 @@ def pick_cbm9002A(module: F.CBM9002A_56ILG):
             PickerOption(
                 part=LCSC_Part(partno="C476253"),
                 pinmap={
-                    "1": module.IFs.rdy[0].IFs.signal,
-                    "2": module.IFs.rdy[1].IFs.signal,
+                    "1": module.rdy[0].signal,
+                    "2": module.rdy[1].signal,
                     #
-                    "4": module.IFs.xtalout,
-                    "5": module.IFs.xtalin,
-                    "13": module.IFs.ifclk.IFs.signal,
-                    "54": module.IFs.clkout.IFs.signal,
+                    "4": module.xtalout,
+                    "5": module.xtalin,
+                    "13": module.ifclk.signal,
+                    "54": module.clkout.signal,
                     #
-                    "8": module.IFs.usb.IFs.usb_if.IFs.d.IFs.p,
-                    "9": module.IFs.usb.IFs.usb_if.IFs.d.IFs.n,
+                    "8": module.usb.usb_if.d.p,
+                    "9": module.usb.usb_if.d.n,
                     #
-                    "15": module.IFs.i2c.IFs.scl.IFs.signal,
-                    "16": module.IFs.i2c.IFs.sda.IFs.signal,
+                    "15": module.i2c.scl.signal,
+                    "16": module.i2c.sda.signal,
                     #
-                    "29": module.IFs.ctl[0].IFs.signal,
-                    "30": module.IFs.ctl[1].IFs.signal,
-                    "31": module.IFs.ctl[2].IFs.signal,
+                    "29": module.ctl[0].signal,
+                    "30": module.ctl[1].signal,
+                    "31": module.ctl[2].signal,
                     #
-                    "42": module.IFs.reset.IFs.signal,
+                    "42": module.reset.signal,
                     #
-                    "44": module.IFs.wakeup.IFs.signal,
+                    "44": module.wakeup.signal,
                     #
-                    "3": module.IFs.avcc.IFs.hv,
-                    "7": module.IFs.avcc.IFs.hv,
+                    "3": module.avcc.hv,
+                    "7": module.avcc.hv,
                     #
-                    "6": module.IFs.avcc.IFs.lv,
-                    "10": module.IFs.avcc.IFs.lv,
+                    "6": module.avcc.lv,
+                    "10": module.avcc.lv,
                     #
-                    "11": module.IFs.vcc.IFs.hv,
-                    "17": module.IFs.vcc.IFs.hv,
-                    "27": module.IFs.vcc.IFs.hv,
-                    "32": module.IFs.vcc.IFs.hv,
-                    "43": module.IFs.vcc.IFs.hv,
-                    "55": module.IFs.vcc.IFs.hv,
+                    "11": module.vcc.hv,
+                    "17": module.vcc.hv,
+                    "27": module.vcc.hv,
+                    "32": module.vcc.hv,
+                    "43": module.vcc.hv,
+                    "55": module.vcc.hv,
                     #
-                    "12": module.IFs.vcc.IFs.lv,
-                    "14": module.IFs.vcc.IFs.lv,  # reserved
-                    "26": module.IFs.vcc.IFs.lv,
-                    "28": module.IFs.vcc.IFs.lv,
-                    "41": module.IFs.vcc.IFs.lv,
-                    "53": module.IFs.vcc.IFs.lv,
-                    "56": module.IFs.vcc.IFs.lv,
-                    "57": module.IFs.vcc.IFs.lv,  # thermal pad
+                    "12": module.vcc.lv,
+                    "14": module.vcc.lv,  # reserved
+                    "26": module.vcc.lv,
+                    "28": module.vcc.lv,
+                    "41": module.vcc.lv,
+                    "53": module.vcc.lv,
+                    "56": module.vcc.lv,
+                    "57": module.vcc.lv,  # thermal pad
                     #
-                    "33": module.IFs.PA[0].IFs.signal,
-                    "34": module.IFs.PA[1].IFs.signal,
-                    "35": module.IFs.PA[2].IFs.signal,
-                    "36": module.IFs.PA[3].IFs.signal,
-                    "37": module.IFs.PA[4].IFs.signal,
-                    "38": module.IFs.PA[5].IFs.signal,
-                    "39": module.IFs.PA[6].IFs.signal,
-                    "40": module.IFs.PA[7].IFs.signal,
+                    "33": module.PA[0].signal,
+                    "34": module.PA[1].signal,
+                    "35": module.PA[2].signal,
+                    "36": module.PA[3].signal,
+                    "37": module.PA[4].signal,
+                    "38": module.PA[5].signal,
+                    "39": module.PA[6].signal,
+                    "40": module.PA[7].signal,
                     #
-                    "18": module.IFs.PB[0].IFs.signal,
-                    "19": module.IFs.PB[1].IFs.signal,
-                    "20": module.IFs.PB[2].IFs.signal,
-                    "21": module.IFs.PB[3].IFs.signal,
-                    "22": module.IFs.PB[4].IFs.signal,
-                    "23": module.IFs.PB[5].IFs.signal,
-                    "24": module.IFs.PB[6].IFs.signal,
-                    "25": module.IFs.PB[7].IFs.signal,
+                    "18": module.PB[0].signal,
+                    "19": module.PB[1].signal,
+                    "20": module.PB[2].signal,
+                    "21": module.PB[3].signal,
+                    "22": module.PB[4].signal,
+                    "23": module.PB[5].signal,
+                    "24": module.PB[6].signal,
+                    "25": module.PB[7].signal,
                     #
-                    "45": module.IFs.PD[0].IFs.signal,
-                    "46": module.IFs.PD[1].IFs.signal,
-                    "47": module.IFs.PD[2].IFs.signal,
-                    "48": module.IFs.PD[3].IFs.signal,
-                    "49": module.IFs.PD[4].IFs.signal,
-                    "50": module.IFs.PD[5].IFs.signal,
-                    "51": module.IFs.PD[6].IFs.signal,
-                    "52": module.IFs.PD[7].IFs.signal,
+                    "45": module.PD[0].signal,
+                    "46": module.PD[1].signal,
+                    "47": module.PD[2].signal,
+                    "48": module.PD[3].signal,
+                    "49": module.PD[4].signal,
+                    "50": module.PD[5].signal,
+                    "51": module.PD[6].signal,
+                    "52": module.PD[7].signal,
                 },
             )
         ],
@@ -509,9 +526,9 @@ def pick_ldo(module: F.LDO):
             PickerOption(
                 part=LCSC_Part(partno="C236655"),
                 pinmap={
-                    "1": module.IFs.power_in.IFs.lv,
-                    "2": module.IFs.power_out.IFs.hv,
-                    "3": module.IFs.power_in.IFs.hv,
+                    "1": module.power_in.lv,
+                    "2": module.power_out.hv,
+                    "3": module.power_in.hv,
                 },
             )
         ],
@@ -530,26 +547,26 @@ def pick_sn74lvc541a(module: F.SNx4LVC541A):
                 #    "output_current_max": F.Constant(350e-3),
                 # },
                 pinmap={
-                    "10": module.IFs.vcc.IFs.lv,
-                    "20": module.IFs.vcc.IFs.hv,
-                    "1": module.IFs.OE[0].IFs.signal,
-                    "19": module.IFs.OE[1].IFs.signal,
-                    "2": module.IFs.A[0].IFs.signal,
-                    "3": module.IFs.A[1].IFs.signal,
-                    "4": module.IFs.A[2].IFs.signal,
-                    "5": module.IFs.A[3].IFs.signal,
-                    "6": module.IFs.A[4].IFs.signal,
-                    "7": module.IFs.A[5].IFs.signal,
-                    "8": module.IFs.A[6].IFs.signal,
-                    "9": module.IFs.A[7].IFs.signal,
-                    "18": module.IFs.Y[0].IFs.signal,
-                    "17": module.IFs.Y[1].IFs.signal,
-                    "16": module.IFs.Y[2].IFs.signal,
-                    "15": module.IFs.Y[3].IFs.signal,
-                    "14": module.IFs.Y[4].IFs.signal,
-                    "13": module.IFs.Y[5].IFs.signal,
-                    "12": module.IFs.Y[6].IFs.signal,
-                    "11": module.IFs.Y[7].IFs.signal,
+                    "10": module.power.lv,
+                    "20": module.power.hv,
+                    "1": module.OE[0].signal,
+                    "19": module.OE[1].signal,
+                    "2": module.A[0].signal,
+                    "3": module.A[1].signal,
+                    "4": module.A[2].signal,
+                    "5": module.A[3].signal,
+                    "6": module.A[4].signal,
+                    "7": module.A[5].signal,
+                    "8": module.A[6].signal,
+                    "9": module.A[7].signal,
+                    "18": module.Y[0].signal,
+                    "17": module.Y[1].signal,
+                    "16": module.Y[2].signal,
+                    "15": module.Y[3].signal,
+                    "14": module.Y[4].signal,
+                    "13": module.Y[5].signal,
+                    "12": module.Y[6].signal,
+                    "11": module.Y[7].signal,
                 },
             )
         ],
@@ -564,28 +581,28 @@ def pick_resistor_array(module: ResistorArray):
                 part=LCSC_Part(partno="C162977"),
                 params={"resistance": F.Constant(100 * P.kohm)},
                 pinmap={
-                    "1": module.NODEs.resistor[0].IFs.unnamed[0],
-                    "2": module.NODEs.resistor[1].IFs.unnamed[0],
-                    "3": module.NODEs.resistor[2].IFs.unnamed[0],
-                    "4": module.NODEs.resistor[3].IFs.unnamed[0],
-                    "5": module.NODEs.resistor[3].IFs.unnamed[1],
-                    "6": module.NODEs.resistor[2].IFs.unnamed[1],
-                    "7": module.NODEs.resistor[1].IFs.unnamed[1],
-                    "8": module.NODEs.resistor[0].IFs.unnamed[1],
+                    "1": module.resistor[0].unnamed[0],
+                    "2": module.resistor[1].unnamed[0],
+                    "3": module.resistor[2].unnamed[0],
+                    "4": module.resistor[3].unnamed[0],
+                    "5": module.resistor[3].unnamed[1],
+                    "6": module.resistor[2].unnamed[1],
+                    "7": module.resistor[1].unnamed[1],
+                    "8": module.resistor[0].unnamed[1],
                 },
             ),
             PickerOption(
                 part=LCSC_Part(partno="C270393"),
                 params={"resistance": F.Constant(100 * P.ohm)},
                 pinmap={
-                    "1": module.NODEs.resistor[0].IFs.unnamed[0],
-                    "2": module.NODEs.resistor[1].IFs.unnamed[0],
-                    "3": module.NODEs.resistor[2].IFs.unnamed[0],
-                    "4": module.NODEs.resistor[3].IFs.unnamed[0],
-                    "5": module.NODEs.resistor[3].IFs.unnamed[1],
-                    "6": module.NODEs.resistor[2].IFs.unnamed[1],
-                    "7": module.NODEs.resistor[1].IFs.unnamed[1],
-                    "8": module.NODEs.resistor[0].IFs.unnamed[1],
+                    "1": module.resistor[0].unnamed[0],
+                    "2": module.resistor[1].unnamed[0],
+                    "3": module.resistor[2].unnamed[0],
+                    "4": module.resistor[3].unnamed[0],
+                    "5": module.resistor[3].unnamed[1],
+                    "6": module.resistor[2].unnamed[1],
+                    "7": module.resistor[1].unnamed[1],
+                    "8": module.resistor[0].unnamed[1],
                 },
             ),
         ],
@@ -613,7 +630,7 @@ def add_app_pickers(module: Module):
         F.CBM9002A_56ILG: pick_cbm9002A,
         F.EEPROM: pick_eeprom,
         F.TVS: pick_tvs,
-        F.Diode: pick_diode,
+        # F.Diode: pick_diode,
         F.Crystal: pick_crystal,
         F.Capacitor: pick_capacitor,
         SFPEdgeConnector: pick_manual_footprint,

@@ -4,13 +4,10 @@
 import logging
 
 import faebryk.library._F as F
-from faebryk.core.core import Module, Node
-from faebryk.core.util import (
-    get_node_children_all,
-)
+from faebryk.core.module import Module, Node
 from faebryk.libs.brightness import TypicalLuminousIntensity
+from faebryk.libs.library import L
 from faebryk.libs.units import P
-from faebryk.libs.util import times
 
 from faebrylyzer.library.faebrykLogo import faebrykLogo
 from faebrylyzer.library.faebrylyzerModule import faebrylyzerModule
@@ -27,205 +24,182 @@ Avoid putting any low-level modules or parameter specializations here.
 """
 
 
+# TODO: move elsewhere
+def set_capacitance_for_decoupling_capacitors(node: Node, capacitance: F.Constant):
+    for n in Node.get_node_children_all(node):
+        if n.has_trait(F.is_decoupled):
+            _capacitance = n.get_trait(F.is_decoupled).get_capacitor().capacitance
+            if isinstance(_capacitance.get_most_narrow(), F.TBD):
+                capacitance.merge(capacitance)
+
+
+def set_resistance_for_pull_resistors(node: Node, resistance: F.Constant):
+    for n in Node.get_node_children_all(node):
+        if n.has_trait(F.ElectricLogic.has_pulls):
+            resistors = n.get_trait(F.ElectricLogic.has_pulls).get_pulls()
+            if resistors:
+                for r in resistors:
+                    if r:
+                        if isinstance(r.resistance.get_most_narrow(), F.TBD):
+                            r.resistance.merge(resistance)
+
+
 class faebrylyzerApp(Module):
-    def __init__(self) -> None:
-        super().__init__()
+    # ----------------------------------------
+    #     modules, interfaces, parameters
+    # ----------------------------------------
+    power_led = L.f_field(F.PoweredLED)(low_side_resistor=False)
+    status_led = L.f_field(F.PoweredLED)(low_side_resistor=False)
+    channel_leds = L.list_field(2, lambda: F.PoweredLED(low_side_resistor=False))
+    ldo: F.LDO
+    faebrylyzer_module: faebrylyzerModule
+    mcu: F.CBM9002A_56ILG_Reference_Design
+    buffer: F.SNx4LVC541A
+    eeprom: F.EEPROM
+    input_current_limiting_resistor = L.list_field(2, ResistorArray)
+    mcu_current_limiting_resistor = L.list_field(2, ResistorArray)
+    input_pullup_resistor = L.list_field(2, ResistorArray)
+    # usb_protection = L.f_field(F.GenericBusProtection)(F.USB2_0)
+    faebryk_logo: faebrykLogo
 
-        # TODO: move elsewhere
-        def set_capacitance_for_decoupling_capacitors(
-            node: Node, capacitance: F.Constant
-        ):
-            for n in get_node_children_all(node):
-                if n.has_trait(F.is_decoupled):
-                    _capacitance = (
-                        n.get_trait(F.is_decoupled).get_capacitor().PARAMs.capacitance
-                    )
-                    if isinstance(_capacitance.get_most_narrow(), F.TBD):
-                        capacitance.merge(capacitance)
-
-        def set_resistance_for_pull_resistors(node: Node, resistance: F.Constant):
-            for n in get_node_children_all(node):
-                if n.has_trait(F.ElectricLogic.has_pulls):
-                    resistors = n.get_trait(F.ElectricLogic.has_pulls).get_pulls()
-                    if resistors:
-                        for r in resistors:
-                            if r:
-                                if isinstance(
-                                    r.PARAMs.resistance.get_most_narrow(), F.TBD
-                                ):
-                                    r.PARAMs.resistance.merge(resistance)
-
-        # ----------------------------------------
-        #     modules, interfaces, parameters
-        # ----------------------------------------
-        class _NODEs(Module.NODES()):
-            power_led = F.PoweredLED(low_side_resistor=False)
-            status_led = F.PoweredLED(low_side_resistor=False)
-            channel_leds = times(2, lambda: F.PoweredLED(low_side_resistor=False))
-            ldo = F.LDO()
-            faebrylyzer_module = faebrylyzerModule()
-            mcu = F.CBM9002A_56ILG_Reference_Design()
-            buffer = F.SNx4LVC541A()
-            eeprom = F.EEPROM()
-            input_current_limiting_resistor = times(2, ResistorArray)
-            mcu_current_limiting_resistor = times(2, ResistorArray)
-            input_pullup_resistor = times(2, ResistorArray)
-            usb_protection = F.GenericBusProtection(F.USB2_0)
-            faebryk_logo = faebrykLogo()
-
-        self.NODEs = _NODEs(self)
-
-        class _PARAMs(Module.PARAMS()): ...
-
-        self.PARAMs = _PARAMs(self)
-
+    def __preinit__(self):
         # ----------------------------------------
         #                aliases
         # ----------------------------------------
-        usb = F.USB2_0()
-        vbus = usb.IFs.usb_if.IFs.buspower
-        v3_3 = self.NODEs.ldo.IFs.power_out
-        gnd = vbus.IFs.lv
-        i2c = self.NODEs.mcu.IFs.i2c
+        usb = self.faebrylyzer_module.usb
+        vbus = usb.usb_if.buspower
+        v3_3 = self.ldo.power_out
+        gnd = vbus.lv
+        i2c = self.mcu.i2c
         # ----------------------------------------
         #                net names
         # ----------------------------------------
         nets = {
-            "vbus": vbus.IFs.hv,
-            "3v3": v3_3.IFs.hv,
+            "vbus": vbus.hv,
+            "3v3": v3_3.hv,
             "gnd": gnd,
-            "usb_P": usb.IFs.usb_if.IFs.d.IFs.p,
-            "usb_N": usb.IFs.usb_if.IFs.d.IFs.n,
-            "sda": i2c.IFs.sda.IFs.signal,
-            "scl": i2c.IFs.scl.IFs.signal,
+            "usb_P": usb.usb_if.d.p,
+            "usb_N": usb.usb_if.d.n,
+            "sda": i2c.sda.signal,
+            "scl": i2c.scl.signal,
         }
         # rename logic channel nets
-        for i, channel in enumerate(self.NODEs.faebrylyzer_module.IFs.channels):
-            nets[f"ch_{i}"] = channel.IFs.signal
+        for i, channel in enumerate(self.faebrylyzer_module.channels):
+            nets[f"ch_{i}"] = channel.signal
         # rename buffer in and output channel nets and mcu input channel nets
-        for i, channel in enumerate(self.NODEs.buffer.IFs.Y):
-            nets[f"buffer_out_{i}"] = channel.IFs.signal
-        for i, channel in enumerate(self.NODEs.buffer.IFs.A):
-            nets[f"buffer_in_{i}"] = channel.IFs.signal
-        for i, channel in enumerate(self.NODEs.mcu.IFs.PB):
-            nets[f"mcu_logic_{i}"] = self.NODEs.mcu.IFs.PB[i].IFs.signal
+        for i, channel in enumerate(self.buffer.Y):
+            nets[f"buffer_out_{i}"] = channel.signal
+        for i, channel in enumerate(self.buffer.A):
+            nets[f"buffer_in_{i}"] = channel.signal
+        for i, channel in enumerate(self.mcu.PB):
+            nets[f"mcu_logic_{i}"] = self.mcu.PB[i].signal
 
         for net_name, mif in nets.items():
             assert isinstance(
                 mif, F.Electrical
-            ), f"You are trying to give a non-electrical interface: {mif}, a net name: {net_name}"
+            ), f"You are trying to give a non-electrical interface: {mif}, a net name: {net_name}"  # noqa E501
             net = F.Net()
             net.add_trait(F.has_overriden_name_defined(net_name))
-            net.IFs.part_of.connect(mif)
+            net.part_of.connect(mif)
 
         # ----------------------------------------
         #              connections
         # ----------------------------------------
         # power connections
-        self.NODEs.ldo.IFs.power_in.connect(vbus)
-        self.NODEs.mcu.IFs.avcc.connect(v3_3)
-        self.NODEs.mcu.IFs.vcc.connect(v3_3)
-        self.NODEs.buffer.IFs.vcc.connect(v3_3)
-        self.NODEs.eeprom.IFs.power.connect(v3_3)
-
-        self.NODEs.faebrylyzer_module.IFs.usb.connect(usb)
+        self.ldo.power_in.connect(vbus)
+        self.mcu.avcc.connect(v3_3)
+        self.mcu.vcc.connect(v3_3)
+        self.buffer.power.connect(v3_3)
+        self.eeprom.power.connect(v3_3)
 
         # tvs protection
-        vbus.get_trait(F.can_be_surge_protected).protect()
+        self.ldo.power_in.get_trait(F.can_be_surge_protected).protect()
         v3_3.get_trait(F.can_be_surge_protected).protect()
-        usb.connect_via(self.NODEs.usb_protection, self.NODEs.mcu.IFs.usb)
+        # usb.connect_via(self.usb_protection, self.mcu.usb)
+        usb.connect(self.mcu.usb)
 
         # MCU status LED
-        self.NODEs.mcu.IFs.PA[1].IFs.signal.connect_via(self.NODEs.status_led, gnd)
+        self.mcu.PA[1].signal.connect_via(self.status_led, gnd)
         # channel leds (only channel 0 and 1 get an indicator LED)
-        for i, led in enumerate(self.NODEs.channel_leds):
-            self.NODEs.buffer.IFs.Y[i].IFs.signal.connect_via(led, gnd)
-            led.IFs.power.PARAMs.voltage.merge(v3_3.PARAMs.voltage)
+        for i, led in enumerate(self.channel_leds):
+            self.buffer.Y[i].signal.connect_via(led, gnd)
+            led.power.voltage.merge(v3_3.voltage)  # TODO remove
         # power indicator LED
-        self.NODEs.power_led.IFs.power.connect(vbus)
+        self.power_led.power.connect(vbus)
 
         # eeprom
-        i2c.connect(self.NODEs.eeprom.IFs.i2c)
-        self.NODEs.eeprom.IFs.write_protect.set(on=False)  # Disable write protection
-        self.NODEs.eeprom.set_address(0x00)
+        i2c.connect(self.eeprom.i2c)
+        self.eeprom.write_protect.set(on=False)  # Disable write protection
+        self.eeprom.set_address(0x00)
 
         # logic channels on connector to buffer via current limiting resistor
         # and pull-up
-        for i, channel in enumerate(self.NODEs.faebrylyzer_module.IFs.channels):
-            channel.IFs.signal.connect_via(
-                self.NODEs.input_current_limiting_resistor[i // 4].NODEs.resistor[
-                    3 - i % 4
-                ],
-                self.NODEs.buffer.IFs.A[i].IFs.signal,
+        for i, channel in enumerate(self.faebrylyzer_module.channels):
+            channel.signal.connect_via(
+                self.input_current_limiting_resistor[i // 4].resistor[3 - i % 4],
+                self.buffer.A[i].signal,
             )
-            self.NODEs.buffer.IFs.A[i].IFs.signal.connect_via(
-                self.NODEs.input_pullup_resistor[i // 4].NODEs.resistor[3 - i % 4],
-                v3_3.IFs.hv,
+            self.buffer.A[i].signal.connect_via(
+                self.input_pullup_resistor[i // 4].resistor[3 - i % 4],
+                v3_3.hv,
             )
 
         # buffer to mcu via current limiting resistor
-        for i, channel in enumerate(self.NODEs.buffer.IFs.Y):
-            channel.IFs.signal.connect_via(
-                self.NODEs.mcu_current_limiting_resistor[i // 4].NODEs.resistor[
-                    3 - i % 4
-                ],
-                self.NODEs.mcu.IFs.PB[i].IFs.signal,
+        for i, channel in enumerate(self.buffer.Y):
+            channel.signal.connect_via(
+                self.mcu_current_limiting_resistor[i // 4].resistor[3 - i % 4],
+                self.mcu.PB[i].signal,
             )
 
         # enable pins of buffer
-        for oe in self.NODEs.buffer.IFs.OE:
-            oe.IFs.signal.connect(gnd)
-
-        # usb
-        self.NODEs.mcu.IFs.usb.connect(self.NODEs.faebrylyzer_module.IFs.usb)
+        for oe in self.buffer.OE:
+            oe.signal.connect(gnd)
 
         # enable mcu
-        self.NODEs.mcu.IFs.wakeup.set(on=True)
+        self.mcu.wakeup.set(on=True)
 
         # ----------------------------------------
         #              parametrization
         # ----------------------------------------
         # current limiting resistors
-        for ra in self.NODEs.input_current_limiting_resistor:
-            ra.PARAMs.resistance.merge(F.Constant(100 * P.ohm))
-        for ra in self.NODEs.mcu_current_limiting_resistor:
-            ra.PARAMs.resistance.merge(F.Constant(100 * P.ohm))
-        for ra in self.NODEs.input_pullup_resistor:
-            ra.PARAMs.resistance.merge(F.Constant(100 * P.kohm))
+        for ra in self.input_current_limiting_resistor:
+            ra.resistance.merge(F.Constant(100 * P.ohm))
+        for ra in self.mcu_current_limiting_resistor:
+            ra.resistance.merge(F.Constant(100 * P.ohm))
+        for ra in self.input_pullup_resistor:
+            ra.resistance.merge(F.Constant(100 * P.kohm))
 
         # led colors and brightness
-        self.NODEs.power_led.NODEs.led.PARAMs.color.merge(
+        self.power_led.led.color.merge(
             F.LED.Color.YELLOW
         )  # TypicalColorsByWavelength.RED)
-        self.NODEs.power_led.NODEs.led.PARAMs.brightness.merge(
+        self.power_led.led.brightness.merge(
             TypicalLuminousIntensity.APPLICATION_LED_INDICATOR_INSIDE.value.value
         )
-        self.NODEs.status_led.NODEs.led.PARAMs.color.merge(
+        self.status_led.led.color.merge(
             F.LED.Color.GREEN
         )  # TypicalColorsByWavelength.YELLOW)
-        self.NODEs.status_led.NODEs.led.PARAMs.brightness.merge(
+        self.status_led.led.brightness.merge(
             TypicalLuminousIntensity.APPLICATION_LED_INDICATOR_INSIDE.value.value
         )
 
-        for led in self.NODEs.channel_leds:
-            led.NODEs.led.PARAMs.color.merge(
-                F.LED.Color.GREEN
-            )  # TypicalColorsByWavelength.GREEN)
-            led.NODEs.led.PARAMs.brightness.merge(
+        for led in self.channel_leds:
+            led.led.color.merge(F.LED.Color.GREEN)  # TypicalColorsByWavelength.GREEN)
+            led.led.brightness.merge(
                 TypicalLuminousIntensity.APPLICATION_LED_INDICATOR_INSIDE.value.value
             )
 
         # ldo parameters
-        self.NODEs.ldo.PARAMs.output_voltage.merge(F.Constant(3.3 * P.V))
-        self.NODEs.ldo.PARAMs.output_current.merge(F.Constant(250 * P.mA))
+        self.ldo.output_voltage.merge(F.Constant(3.3 * P.V))
+        self.ldo.output_current.merge(F.Constant(250 * P.mA))
 
         # eeprom parameters
-        self.NODEs.eeprom.PARAMs.memory_size.merge(F.Constant(256 * P.kB))
+        self.eeprom.memory_size.merge(F.Constant(256 * P.kB))
 
         # TODO remove this ----------------------------------------
-        for cap in self.NODEs.mcu.NODEs.oscillator.NODEs.capacitors:
-            cap.PARAMs.capacitance.merge(F.Constant(15 * P.pF))
-        self.NODEs.status_led.IFs.power.PARAMs.voltage.merge(v3_3.PARAMs.voltage)
+        # for cap in self.mcu.oscillator.capacitors:
+        #    cap.capacitance.merge(F.Constant(15 * P.pF))
+        self.status_led.power.voltage.merge(v3_3.voltage)
         # TODO remove this ----------------------------------------
 
         set_capacitance_for_decoupling_capacitors(self, F.Constant(100 * P.nF))

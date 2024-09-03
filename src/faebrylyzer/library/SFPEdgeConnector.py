@@ -3,59 +3,25 @@
 
 import logging
 
-from faebryk.core.core import Module
-from faebryk.library.can_attach_to_footprint_via_pinmap import (
-    can_attach_to_footprint_via_pinmap,
-)
-from faebryk.library.Electrical import Electrical
-from faebryk.library.has_designator_prefix_defined import has_designator_prefix_defined
-from faebryk.library.KicadFootprint import KicadFootprint
-from faebryk.libs.util import times
+import faebryk.library._F as F
+from faebryk.core.module import Module
+from faebryk.libs.library import L
 
 logger = logging.getLogger(__name__)
 
 
 class SFPEdgeConnector(Module):
-    @classmethod
-    def NODES(cls):
-        # submodules
-        class _NODES(super().NODES()):
-            pass
+    unnamed = L.list_field(20, F.Electrical)
 
-        return _NODES
+    designator_prefix = L.f_field(F.has_designator_prefix_defined)("J")
 
-    @classmethod
-    def PARAMS(cls):
-        # parameters
-        class _PARAMS(super().PARAMS()):
-            pass
+    @L.rt_field
+    def can_attach_to_footprint(self):
+        return F.can_attach_to_footprint_via_pinmap(
+            pinmap={f"{i+1}": self.unnamed[i] for i in range(20)}
+        )
 
-        return _PARAMS
-
-    @classmethod
-    def IFS(cls):
-        # interfaces
-        class _IFS(super().IFS()):
-            unnamed = times(20, Electrical)
-
-        return _IFS
-
-    def __init__(self):
-        # boilerplate
-        super().__init__()
-        self.IFs = self.IFS()(self)
-        self.PARAMs = self.PARAMS()(self)
-        self.NODEs = self.NODES()(self)
-
-        # connections
-
-        # traits
-        self.add_trait(has_designator_prefix_defined("J"))
-
-        self.add_trait(
-            can_attach_to_footprint_via_pinmap(
-                pinmap={f"{i+1}": self.IFs.unnamed[i] for i in range(20)}
-            )
-        ).attach(
-            KicadFootprint("custom:SFP_Edge", pin_names=[f"{i+1}" for i in range(20)])
+    def __preinit__(self):
+        F.can_attach_to_footprint().attach(
+            F.KicadFootprint("custom:SFP_Edge", pin_names=[f"{i+1}" for i in range(20)])
         )
