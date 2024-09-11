@@ -16,12 +16,12 @@ class SFPEdgeConnector(Module):
     designator_prefix = L.f_field(F.has_designator_prefix_defined)("J")
 
     @L.rt_field
-    def can_attach_to_footprint(self):
+    def footprint(self):
         return F.can_attach_to_footprint_via_pinmap(
             pinmap={f"{i+1}": self.unnamed[i] for i in range(20)}
         )
 
     def __preinit__(self):
-        F.can_attach_to_footprint().attach(
+        self.footprint.attach(
             F.KicadFootprint("custom:SFP_Edge", pin_names=[f"{i+1}" for i in range(20)])
         )

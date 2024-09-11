@@ -26,7 +26,7 @@ Avoid putting any low-level modules or parameter specializations here.
 
 # TODO: move elsewhere
 def set_capacitance_for_decoupling_capacitors(node: Node, capacitance: F.Constant):
-    for n in Node.get_node_children_all(node):
+    for n in node.get_children(direct_only=False, types=Module):
         if n.has_trait(F.is_decoupled):
             _capacitance = n.get_trait(F.is_decoupled).get_capacitor().capacitance
             if isinstance(_capacitance.get_most_narrow(), F.TBD):
@@ -34,7 +34,7 @@ def set_capacitance_for_decoupling_capacitors(node: Node, capacitance: F.Constan
 
 
 def set_resistance_for_pull_resistors(node: Node, resistance: F.Constant):
-    for n in Node.get_node_children_all(node):
+    for n in node.get_children(direct_only=False, types=Module):
         if n.has_trait(F.ElectricLogic.has_pulls):
             resistors = n.get_trait(F.ElectricLogic.has_pulls).get_pulls()
             if resistors:

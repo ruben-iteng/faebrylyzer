@@ -16,7 +16,7 @@ class MountingSlot(Module):
     designator_prefix = L.f_field(F.has_designator_prefix_defined)("H")
 
     @L.rt_field
-    def can_attach_to_footprint(self):
+    def footprint(self):
         return F.can_attach_to_footprint_via_pinmap(
             {
                 "1": self.unnamed,
@@ -24,6 +24,4 @@ class MountingSlot(Module):
         )
 
     def __preinit__(self):
-        F.can_attach_to_footprint().attach(
-            F.KicadFootprint("custom:MountingSlot", pin_names=["1"])
-        )
+        self.footprint.attach(F.KicadFootprint("custom:MountingSlot", pin_names=["1"]))

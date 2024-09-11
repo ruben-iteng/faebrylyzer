@@ -7,7 +7,6 @@ import faebryk.library._F as F
 from faebryk.core.module import Module
 from faebryk.libs.library import L
 from faebryk.libs.units import Quantity
-from faebryk.libs.util import times
 
 logger = logging.getLogger(__name__)
 

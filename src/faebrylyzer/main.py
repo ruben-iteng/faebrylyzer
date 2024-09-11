@@ -4,7 +4,7 @@ from pathlib import Path
 
 import faebryk.libs.picker.lcsc as lcsc
 import typer
-from faebryk.core.util import get_all_modules
+from faebryk.core.module import Module
 from faebryk.exporters.esphome.esphome import dump_esphome_config, make_esphome_config
 from faebryk.exporters.parameters.parameters_to_file import export_parameters_to_file
 from faebryk.exporters.pcb.kicad.artifacts import export_svg
@@ -79,7 +79,9 @@ def main(
 
     # pick parts ---------------------------------------------
     logger.info("Picking parts")
-    modules = {n.get_most_special() for n in get_all_modules(app)}
+    modules = {
+        n.get_most_special() for n in app.get_children(direct_only=False, types=Module)
+    }
 
     # from faebryk.libs.picker.picker import logger as picker_logger
     # picker_logger.setLevel(logging.DEBUG)

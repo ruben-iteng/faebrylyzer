@@ -22,8 +22,8 @@ repository = "https://github.com/ruben-iteng/faebrylyzer"
 homepage = "https://github.com/ruben-iteng/faebrylyzer"
 
 [tool.poetry.dependencies]
-python = "^3.12,<3.13"                                                        # max allowed version by scipy
-faebryk = { path = "../../faebryk", develop = true} # { git = "https://github.com/faebryk/faebryk.git", branch = "main" }
+python = "^3.12,<3.13"                                # max allowed version by scipy
+faebryk = { path = "../../faebryk", develop = true }  # { git = "https://github.com/faebryk/faebryk.git", branch = "main" }
 typer = { version = ">=0.9,<0.13", extras = ["all"] }
 jinja2 = "^3.1.4"
 
@@ -137,6 +137,7 @@ per-file-ignores = {}
 # Allow unused variables when underscore-prefixed.
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
-[tool.ruff.mccabe]
+
+[tool.ruff.lint.mccabe]
 # Unlike Flake8, default to a complexity level of 10.
 max-complexity = 10
