@@ -341,10 +341,11 @@ def transform_pcb(transformer: PCB_Transformer):
         (board_width, board_height),
         (0, board_height),
     ]
-    transformer.insert_pcb_outline(
-        outline_coordinates,
-        corner_radius_mm=0.5,
-    )
+    # TODO reenable
+    # transformer.insert_pcb_outline(
+    #    outline_coordinates,
+    #    corner_radius_mm=0.5,
+    # )
 
     # ----------------------------------------
     #               Copper zones

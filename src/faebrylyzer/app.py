@@ -5,6 +5,7 @@ import logging
 
 import faebryk.library._F as F
 from faebryk.core.module import Module, Node
+from faebryk.core.parameter import Parameter
 from faebryk.libs.brightness import TypicalLuminousIntensity
 from faebryk.libs.library import L
 from faebryk.libs.units import P
@@ -25,7 +26,7 @@ Avoid putting any low-level modules or parameter specializations here.
 
 
 # TODO: move elsewhere
-def set_capacitance_for_decoupling_capacitors(node: Node, capacitance: F.Constant):
+def set_capacitance_for_decoupling_capacitors(node: Node, capacitance: Parameter):
     for n in node.get_children(direct_only=False, types=Module):
         if n.has_trait(F.is_decoupled):
             _capacitance = n.get_trait(F.is_decoupled).get_capacitor().capacitance
@@ -33,7 +34,7 @@ def set_capacitance_for_decoupling_capacitors(node: Node, capacitance: F.Constan
                 capacitance.merge(capacitance)
 
 
-def set_resistance_for_pull_resistors(node: Node, resistance: F.Constant):
+def set_resistance_for_pull_resistors(node: Node, resistance: Parameter):
     for n in node.get_children(direct_only=False, types=Module):
         if n.has_trait(F.ElectricLogic.has_pulls):
             resistors = n.get_trait(F.ElectricLogic.has_pulls).get_pulls()
@@ -163,11 +164,11 @@ class faebrylyzerApp(Module):
         # ----------------------------------------
         # current limiting resistors
         for ra in self.input_current_limiting_resistor:
-            ra.resistance.merge(F.Constant(100 * P.ohm))
+            ra.resistance.merge(F.Range.from_center_rel(100 * P.ohm, 0.05))
         for ra in self.mcu_current_limiting_resistor:
-            ra.resistance.merge(F.Constant(100 * P.ohm))
+            ra.resistance.merge(F.Range.from_center_rel(100 * P.ohm, 0.05))
         for ra in self.input_pullup_resistor:
-            ra.resistance.merge(F.Constant(100 * P.kohm))
+            ra.resistance.merge(F.Range.from_center_rel(100 * P.kohm, 0.05))
 
         # led colors and brightness
         self.power_led.led.color.merge(
@@ -190,11 +191,11 @@ class faebrylyzerApp(Module):
             )
 
         # ldo parameters
-        self.ldo.output_voltage.merge(F.Constant(3.3 * P.V))
-        self.ldo.output_current.merge(F.Constant(250 * P.mA))
+        self.ldo.output_voltage.merge(F.Range.from_center_rel(3.3 * P.V, 0.05))
+        self.ldo.output_current.merge(F.Range.from_center_rel(250 * P.mA, 0.05))
 
         # eeprom parameters
-        self.eeprom.memory_size.merge(F.Constant(256 * P.kB))
+        self.eeprom.memory_size.merge(F.Range.from_center_rel(256 * P.kB, 0.05))
 
         # TODO remove this ----------------------------------------
         # for cap in self.mcu.oscillator.capacitors:
@@ -202,8 +203,12 @@ class faebrylyzerApp(Module):
         self.status_led.power.voltage.merge(v3_3.voltage)
         # TODO remove this ----------------------------------------
 
-        set_capacitance_for_decoupling_capacitors(self, F.Constant(100 * P.nF))
-        set_resistance_for_pull_resistors(self, F.Constant(3.3 * P.kohm))
+        set_capacitance_for_decoupling_capacitors(
+            self, F.Range.from_center_rel(100 * P.nF, 0.05)
+        )
+        set_resistance_for_pull_resistors(
+            self, F.Range.from_center_rel(3.3 * P.kohm, 0.05)
+        )
 
         # ----------------------------------------
         #              specializations
