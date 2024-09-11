@@ -1,0 +1,457 @@
+(footprint "SFP_Edge"
+	(version 20240108)
+	(generator "pcbnew")
+	(generator_version "8.0")
+	(layer "F.Cu")
+	(descr "SFP PCB card edge for mating with SFP connectors")
+	(tags "SFP, Card Edge")
+	(property "Reference" "REF**"
+		(at 0 -5.5 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "d371a0de-40d3-46c0-97ce-8ac4c69428bc")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "SFP_Edge"
+		(at 0 4 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "c705f9b9-bac9-4ec4-9f31-08465cc33425")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Footprint" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "b68d0ba8-c6ad-4d7f-9713-0504e45a41e2")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2109141830_HCTL-HC-SFP-20P_C2897291.pdf"
+		(at 0 8 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "fe61f315-00a2-4925-b093-10c9636c9179")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "0966274b-5f43-4ecd-adcf-1f0ec0150b96")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(zone_connect 1)
+	(attr smd board_only exclude_from_pos_files exclude_from_bom dnp)
+	(fp_line
+		(start -4.6 -6.5)
+		(end 4.6 -6.5)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "B.SilkS")
+		(uuid "e8b8f55d-c4f6-4a57-b0ea-24da758c047e")
+	)
+	(fp_line
+		(start -4.6 -6.5)
+		(end 4.6 -6.5)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "0f5f9d7f-1faa-4d2c-acf3-02eb2cf28fec")
+	)
+	(fp_line
+		(start -4.6 0)
+		(end -4.6 -6.5)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "Dwgs.User")
+		(uuid "61049f38-7d2b-42ca-8abe-a9c4e3c0cf6d")
+	)
+	(fp_line
+		(start -4.6 0)
+		(end 4.6 0)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "Dwgs.User")
+		(uuid "1fed348b-fdce-4c83-aedf-39092e813536")
+	)
+	(fp_line
+		(start 4.6 0)
+		(end 4.6 -6.5)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "Dwgs.User")
+		(uuid "cecc122e-749c-4aa9-a944-35d4a187550e")
+	)
+	(fp_line
+		(start -4.6 -0.3)
+		(end 4.6 -0.3)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "2507b142-fd70-4132-a359-56f98aeaea9c")
+	)
+	(fp_line
+		(start 4 0.25)
+		(end 4 0.75)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "f75f8966-d23a-4a05-a483-43f5d5fb7020")
+	)
+	(fp_line
+		(start 4 0.25)
+		(end 6 2.25)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "90d105b4-1982-4dd1-a031-a2413193dc91")
+	)
+	(fp_line
+		(start 4 0.75)
+		(end 4 0.25)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "e9b164b7-1534-4712-8830-ab798bbe2e3f")
+	)
+	(fp_line
+		(start 4.5 0.25)
+		(end 4 0.25)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "ceb80e06-83ad-472f-b2c6-b4ed6dd0aa34")
+	)
+	(fp_line
+		(start 6 2.25)
+		(end 7.5 2.25)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "3c73b619-a8a3-4697-a109-f0a7418c3846")
+	)
+	(fp_text user "2 - C0.3"
+		(at 7.5 2.25 0)
+		(unlocked yes)
+		(layer "F.Fab" knockout)
+		(uuid "a33d95fa-4806-4f7e-b78c-da3f86ca892d")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left)
+		)
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 6 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "ea7139b4-f7aa-452f-b5a4-eaca7902ee90")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" connect roundrect
+		(at 3.4 -4.1)
+		(size 0.6 3.6)
+		(drill
+			(offset 0 1.8)
+		)
+		(layers "B.Cu" "B.Mask")
+		(roundrect_rratio 0.1666666667)
+		(thermal_bridge_angle 0)
+		(uuid "a430ad27-ba3e-47d7-bb70-f378099dabc2")
+	)
+	(pad "2" connect roundrect
+		(at 2.6 -4.1)
+		(size 0.6 2.8)
+		(drill
+			(offset 0 1.4)
+		)
+		(layers "B.Cu" "B.Mask")
+		(roundrect_rratio 0.1666666667)
+		(thermal_bridge_angle 0)
+		(uuid "b5026962-9aa8-42d4-9133-649b8a5fd98f")
+	)
+	(pad "3" connect roundrect
+		(at 1.8 -4.1)
+		(size 0.6 2.8)
+		(drill
+			(offset 0 1.4)
+		)
+		(layers "B.Cu" "B.Mask")
+		(roundrect_rratio 0.1666666667)
+		(thermal_bridge_angle 0)
+		(uuid "fc818cbb-6bd2-4707-a8ae-38b3d79b810f")
+	)
+	(pad "4" connect roundrect
+		(at 1 -4.1)
+		(size 0.6 2.8)
+		(drill
+			(offset 0 1.4)
+		)
+		(layers "B.Cu" "B.Mask")
+		(roundrect_rratio 0.1666666667)
+		(thermal_bridge_angle 0)
+		(uuid "79dc82a8-2ee4-477f-b5ef-adfe0de176e6")
+	)
+	(pad "5" connect roundrect
+		(at 0.2 -4.1)
+		(size 0.6 2.8)
+		(drill
+			(offset 0 1.4)
+		)
+		(layers "B.Cu" "B.Mask")
+		(roundrect_rratio 0.1666666667)
+		(thermal_bridge_angle 0)
+		(uuid "4ca9a42b-4b43-4fc6-8949-5bb962ab1c48")
+	)
+	(pad "6" connect roundrect
+		(at -0.6 -4.1)
+		(size 0.6 2.8)
+		(drill
+			(offset 0 1.4)
+		)
+		(layers "B.Cu" "B.Mask")
+		(roundrect_rratio 0.1666666667)
+		(thermal_bridge_angle 0)
+		(uuid "0e11514c-6615-4a2a-86d9-d8f5514b2320")
+	)
+	(pad "7" connect roundrect
+		(at -1.4 -4.1)
+		(size 0.6 2.8)
+		(drill
+			(offset 0 1.4)
+		)
+		(layers "B.Cu" "B.Mask")
+		(roundrect_rratio 0.1666666667)
+		(thermal_bridge_angle 0)
+		(uuid "b30ba01d-d6ff-4aa1-a293-b9cf232574ea")
+	)
+	(pad "8" connect roundrect
+		(at -2.2 -4.1)
+		(size 0.6 2.8)
+		(drill
+			(offset 0 1.4)
+		)
+		(layers "B.Cu" "B.Mask")
+		(roundrect_rratio 0.1666666667)
+		(thermal_bridge_angle 0)
+		(uuid "109de333-5b8d-491c-bc14-781569e12bce")
+	)
+	(pad "9" connect roundrect
+		(at -3 -3.3)
+		(size 0.6 3.6)
+		(drill
+			(offset 0 1)
+		)
+		(layers "B.Cu" "B.Mask")
+		(roundrect_rratio 0.1666666667)
+		(thermal_bridge_angle 0)
+		(uuid "7715c660-3efb-4f63-863c-cdb438395874")
+	)
+	(pad "10" connect roundrect
+		(at -3.8 -4.1)
+		(size 0.6 3.6)
+		(drill
+			(offset 0 1.8)
+		)
+		(layers "B.Cu" "B.Mask")
+		(roundrect_rratio 0.1666666667)
+		(thermal_bridge_angle 0)
+		(uuid "a00205c0-012f-4fcd-a2eb-0bde8408ed4a")
+	)
+	(pad "11" connect roundrect
+		(at -3.4 -4.1)
+		(size 0.6 3.6)
+		(drill
+			(offset 0 1.8)
+		)
+		(layers "F.Cu" "F.Mask")
+		(roundrect_rratio 0.1666666667)
+		(thermal_bridge_angle 0)
+		(uuid "b0a6fdd2-0cf6-41a6-a749-139c350ae580")
+	)
+	(pad "12" connect roundrect
+		(at -2.6 -4.1)
+		(size 0.6 2.8)
+		(drill
+			(offset 0 1.4)
+		)
+		(layers "F.Cu" "F.Mask")
+		(roundrect_rratio 0.1666666667)
+		(thermal_bridge_angle 0)
+		(uuid "a395fcbf-ab57-4b7b-a55c-690f20f49522")
+	)
+	(pad "13" connect roundrect
+		(at -1.8 -4.1)
+		(size 0.6 2.8)
+		(drill
+			(offset 0 1.4)
+		)
+		(layers "F.Cu" "F.Mask")
+		(roundrect_rratio 0.1666666667)
+		(thermal_bridge_angle 0)
+		(uuid "f8e8fbdd-5bc6-4605-9c2d-61190280b8d0")
+	)
+	(pad "14" connect roundrect
+		(at -1 -4.1)
+		(size 0.6 3.6)
+		(drill
+			(offset 0 1.8)
+		)
+		(layers "F.Cu" "F.Mask")
+		(roundrect_rratio 0.1666666667)
+		(thermal_bridge_angle 0)
+		(uuid "fe33217f-56a6-4153-85af-913f228c9ee6")
+	)
+	(pad "15" connect roundrect
+		(at -0.2 -4.1)
+		(size 0.6 3.2)
+		(drill
+			(offset 0 1.6)
+		)
+		(layers "F.Cu" "F.Mask")
+		(roundrect_rratio 0.1666666667)
+		(thermal_bridge_angle 0)
+		(uuid "3bb9a23a-3862-4c96-a22d-1bf373a11c89")
+	)
+	(pad "16" connect roundrect
+		(at 0.6 -4.1)
+		(size 0.6 3.2)
+		(drill
+			(offset 0 1.6)
+		)
+		(layers "F.Cu" "F.Mask")
+		(roundrect_rratio 0.1666666667)
+		(thermal_bridge_angle 0)
+		(uuid "4d5cbd67-ab73-4937-b565-9d0c0c6ead82")
+	)
+	(pad "17" connect roundrect
+		(at 1.4 -4.1)
+		(size 0.6 3.6)
+		(drill
+			(offset 0 1.8)
+		)
+		(layers "F.Cu" "F.Mask")
+		(roundrect_rratio 0.1666666667)
+		(thermal_bridge_angle 0)
+		(uuid "b49214dc-886c-44c5-aabd-5c4a9264cb9a")
+	)
+	(pad "18" connect roundrect
+		(at 2.2 -4.1)
+		(size 0.6 2.8)
+		(drill
+			(offset 0 1.4)
+		)
+		(layers "F.Cu" "F.Mask")
+		(roundrect_rratio 0.1666666667)
+		(thermal_bridge_angle 0)
+		(uuid "d6f51e4b-fd8c-470a-b029-9bb36c0cd74d")
+	)
+	(pad "19" connect roundrect
+		(at 3 -4.1)
+		(size 0.6 2.8)
+		(drill
+			(offset 0 1.4)
+		)
+		(layers "F.Cu" "F.Mask")
+		(roundrect_rratio 0.1666666667)
+		(thermal_bridge_angle 0)
+		(uuid "16474cc2-8111-41ae-8a19-a99fb6742a47")
+	)
+	(pad "20" connect roundrect
+		(at 3.8 -4.1)
+		(size 0.6 3.6)
+		(drill
+			(offset 0 1.8)
+		)
+		(layers "F.Cu" "F.Mask")
+		(roundrect_rratio 0.1666666667)
+		(thermal_bridge_angle 0)
+		(uuid "d27c09e6-6cd8-4361-bf2d-b2ec5fad7e4b")
+	)
+	(zone
+		(net 0)
+		(net_name "")
+		(layers "*.Cu" "*.Adhes" "*.Paste" "*.SilkS")
+		(uuid "11ed16f2-aafc-4c27-b951-19450fc1310a")
+		(name "connection_zone")
+		(hatch edge 0.5)
+		(connect_pads
+			(clearance 0)
+		)
+		(min_thickness 0.25)
+		(filled_areas_thickness no)
+		(keepout
+			(tracks allowed)
+			(vias not_allowed)
+			(pads not_allowed)
+			(copperpour not_allowed)
+			(footprints not_allowed)
+		)
+		(fill
+			(thermal_gap 0.5)
+			(thermal_bridge_width 0.5)
+		)
+		(polygon
+			(pts
+				(xy 4.6 0) (xy -4.6 0) (xy -4.6 -4) (xy 4.6 -4)
+			)
+		)
+	)
+)
